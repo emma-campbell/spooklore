@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { Nunito_Sans, Fraunces } from "next/font/google";
-import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+import { Footer } from "@/components/layout/footer";
 import { Nav } from "@/components/layout/nav";
 import { LiteralWrapper } from "@/context/literal";
-import { Footer } from "@/components/layout/footer";
-import { useEffect } from "react";
+import type { Metadata } from "next";
+import { Fraunces, Nunito_Sans } from "next/font/google";
+import "./globals.css";
 
 const nunito = Nunito_Sans({
   subsets: ["latin", "latin-ext"],
@@ -35,6 +35,7 @@ export default function RootLayout({
           </main>
         </LiteralWrapper>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
