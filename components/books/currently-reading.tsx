@@ -24,7 +24,7 @@ const query = gql`
   }
 `;
 
-export function CurrentlyReading() {
+export default function CurrentlyReading() {
   const [book, setBook] = useState({} as Book);
   const { data } = useSuspenseQuery(query);
 

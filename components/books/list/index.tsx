@@ -2,7 +2,13 @@ import moment from "moment";
 import { BookListItem } from "./item";
 import { Suspense } from "react";
 
-export function BookList({ year, books }: { year: number; books: any[] }) {
+export default function BookList({
+  year,
+  books,
+}: {
+  year: number;
+  books: any[];
+}) {
   return (
     <div className="flex flex-col space-y-2">
       <div className="flex flex-row space-x-2 align-text-bottom justify-end">

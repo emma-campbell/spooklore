@@ -1,8 +1,14 @@
-import { CurrentlyReading } from "@/components/books/currently-reading";
-import FavoriteBooks from "@/components/books/favorites";
-import { BookList } from "@/components/books/list";
 import moment from "moment";
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+const CurrentlyReading = dynamic(
+  () => import("@/components/books/currently-reading")
+);
+
+const FavoriteBooks = dynamic(() => import("@/components/books/favorites"));
+
+const BookList = dynamic(() => import("@/components/books/list"));
 
 async function getBooks() {
   const data = (
@@ -88,8 +94,12 @@ export default async function Books() {
   return (
     <>
       <section id="currently_reading" className="pt-24 flex-col space-y-12">
-        <CurrentlyReading />
-        <FavoriteBooks />
+        <Suspense>
+          <CurrentlyReading />
+        </Suspense>
+        <Suspense>
+          <FavoriteBooks />
+        </Suspense>
         <Suspense>
           <section className="flex flex-col space-y-8">
             {read.map((entry) => {

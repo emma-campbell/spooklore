@@ -24,7 +24,7 @@ const query = gql`
   }
 `;
 
-export const ReadingPreview = () => {
+export default function ReadingPreview() {
   const [book, setBook] = useState({} as Book);
 
   const { data } = useSuspenseQuery(query);

@@ -1,7 +1,9 @@
-import Image from "next/image";
 import HeaderImage from "@/public/the_spooky_supper.png";
 import moment from "moment";
-import { ReadingPreview } from "@/components/reading-preview";
+import dynamic from "next/dynamic";
+
+const ReadingPreview = dynamic(() => import("@/components/reading-preview"));
+const Image = dynamic(() => import('next/image'));
 
 const posts = [
   {
@@ -51,7 +53,9 @@ export default function Home() {
       </section>
       <section className="grid grid-cols-5">
         <div className="col-span-2">
-        <h1 className="font-serif text-2xl text-[#FFFFFF]">currently reading</h1>
+          <h1 className="font-serif text-2xl text-[#FFFFFF]">
+            currently reading
+          </h1>
         </div>
         <div className="col-span-3">
           <ReadingPreview />
