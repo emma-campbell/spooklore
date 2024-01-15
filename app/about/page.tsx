@@ -59,6 +59,7 @@ export default function About() {
         </div>
         <div>
           <Image
+            priority
             src={Portrait}
             alt="Photo of Emma"
             className="w-full rounded-md"
@@ -96,9 +97,19 @@ export default function About() {
         </div>
       </section>
       <section className="grid grid-cols-3 pt-8 gap-4 [&_img]:rounded-md">
-        <Image src={Crew} placeholder="blur" alt="columbus crew tifo" />
-        <Image src={Andrea} placeholder="blur" alt="Andrea and I on ATVs" />
-        <Image src={Moose} placeholder="blur" alt="My dog Moose" />
+        <Image
+          priority
+          src={Crew}
+          placeholder="blur"
+          alt="columbus crew tifo"
+        />
+        <Image
+          priority
+          src={Andrea}
+          placeholder="blur"
+          alt="Andrea and I on ATVs"
+        />
+        <Image priority src={Moose} placeholder="blur" alt="My dog Moose" />
       </section>
       <section className="pt-12">
         <h1 className="font-serif text-3xl">

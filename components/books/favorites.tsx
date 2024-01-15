@@ -28,8 +28,6 @@ export default function FavoriteBooks() {
     setBooks((data as any)?.shelf.books as Book[]);
   }, [data]);
 
-  console.log(books);
-
   return (
     <Suspense>
       <div className="bg-[#7F7F7F]/15 px-8 py-6 rounded-md grid grid-cols-7 gap-4 relative w-[48rem] h-48 -left-12">

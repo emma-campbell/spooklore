@@ -1,5 +1,6 @@
 import moment from "moment";
 import { BookListItem } from "./item";
+import { Suspense } from "react";
 
 export function BookList({ year, books }: { year: number; books: any[] }) {
   return (
@@ -8,13 +9,17 @@ export function BookList({ year, books }: { year: number; books: any[] }) {
         <h2 className="font-serif italic text-3xl text-[#636363]">{year}</h2>
         <span className="relative border-b-[1px] border-[#636363] w-full -top-2"></span>
       </div>
-      <div className="flex flex-col">
-        {books
-          .sort((a, b) => moment(b.finished).unix() - moment(a.finished).unix())
-          .map((book) => (
-            <BookListItem key={book.title} book={book} />
-          ))}
-      </div>
+      <Suspense>
+        <div className="flex flex-col">
+          {books
+            .sort(
+              (a, b) => moment(b.finished).unix() - moment(a.finished).unix()
+            )
+            .map((book) => (
+              <BookListItem key={book.title} book={book} />
+            ))}
+        </div>
+      </Suspense>
     </div>
   );
 }

@@ -39,6 +39,7 @@ export function CurrentlyReading() {
     <Suspense>
       <div className="bg-[#7F7F7F]/10 min-w-full h-64 rounded-md px-28 flex flex-col items-center [&_*]:-top-20 [&_*]:relative">
         <Image
+          priority
           className="w-32 relative rounded-md"
           src={book.cover}
           alt={`${book.title} cover`}

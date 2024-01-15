@@ -2,6 +2,7 @@ import { CurrentlyReading } from "@/components/books/currently-reading";
 import FavoriteBooks from "@/components/books/favorites";
 import { BookList } from "@/components/books/list";
 import moment from "moment";
+import { Suspense } from "react";
 
 async function getBooks() {
   const data = (
@@ -89,14 +90,16 @@ export default async function Books() {
       <section id="currently_reading" className="pt-24 flex-col space-y-12">
         <CurrentlyReading />
         <FavoriteBooks />
-        <section className="flex flex-col space-y-8">
-          {read.map((entry) => {
-            const [year, books] = entry;
-            if (year >= 2018) {
-              return <BookList key={year} year={year} books={books} />;
-            }
-          })}
-        </section>
+        <Suspense>
+          <section className="flex flex-col space-y-8">
+            {read.map((entry) => {
+              const [year, books] = entry;
+              if (year >= 2018) {
+                return <BookList key={year} year={year} books={books} />;
+              }
+            })}
+          </section>
+        </Suspense>
       </section>
     </>
   );

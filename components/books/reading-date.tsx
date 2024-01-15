@@ -26,7 +26,6 @@ export default function ReadDate({ id }: { id: string }) {
     setDate((data as any)?.getReadDates?.[0]?.started);
   }, [data]);
 
-  console.log(date);
   return (
     <>
       <p className="text-sm">{moment(date).format("MMMM Do, YYYY")}</p>
