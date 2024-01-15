@@ -5,10 +5,10 @@ import Portrait from "@/public/photo_of_emma.jpeg";
 import Image from "next/image";
 import Link from "next/link";
 
-export const About = () => {
+export default function About() {
   return (
     <>
-      <section className="grid grid-cols-2 pt-4">
+      <section className="grid grid-cols-2 pt-8">
         <div className="space-y-8 font-md decoration-wavy">
           <p>
             My name is Emma. I am a software engineer from Columbus, OH
@@ -107,6 +107,4 @@ export const About = () => {
       </section>
     </>
   );
-};
-
-export default About;
+}
