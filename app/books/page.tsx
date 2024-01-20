@@ -23,7 +23,7 @@ async function getBooks() {
       ) {
         booksByReadingStateAndProfile(limit: $limit offset: $offset readingStatus: $readingStatus profileId: $profileId) { id title authors { name } } }`,
         variables: {
-          limit: 100,
+          limit: 500,
           offset: 0,
           readingStatus: "FINISHED",
           profileId: process.env.NEXT_PUBLIC_LITERAL_PROFILE_ID,
@@ -69,6 +69,7 @@ async function getBooks() {
       finished: date?.finished,
     };
 
+    console.log(b);
     if (b.finished != null) {
       const year = moment(b.finished).year();
 
