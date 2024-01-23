@@ -57,13 +57,13 @@ Add the `.env` file to `.gitignore`. You don't want to commit this file to any s
 
 Then, open up `.env` and add the connection string to your development branch
 
-```sh title=".env"
+```sh
 DATABASE_URL="<your connection string>"
 ```
 
 Now, open up `prisma/schema.prisma` and change the database provider to `mysql`.
 
-```prisma showLineNumbers title="prisma/schema.prisma" {2}
+```prisma showLineNumbers {2}
 datasource db {
     provider    =   "mysql"
     url         =   env("DATABASE_URL")
@@ -72,7 +72,7 @@ datasource db {
 
 You will also need to add the `referentialIntegrity` feature to the generator block, and set `relationMode` in the database block to `prisma`.
 
-```prisma showLineNumbers title="prisma/schema.prisma" {4,9}
+```prisma showLineNumbers {4,9}
 datasource db {
     provider        =   "mysql"
     url             =   env("DATABASE_URL")
@@ -90,7 +90,7 @@ generator client {
 I keep many of my helper methods in a directory called `/lib`. There, we are going to create a new file called `prisma.ts`. Our goal with this
 helper is to follow the [best Next.js practices](https://pris.ly/d/help/next-js-best-practices) according to Prisma.
 
-```ts showLineNumbers title="lib/prisma.ts"
+```ts showLineNumbers
 import { PrismaClient } from "@prisma/client";
 
 // PrismaClient is attached to the `global` object in development
@@ -136,7 +136,7 @@ the time being they won't be too complex and can stay in the same file.
 
 We can create a new table using the `model` keyword, and then add two columns, `slug` and `views`.
 
-```prisma showLineNumbers title="prisma/schema.prisma" {5-8}
+```prisma showLineNumbers {5-8}
 // .
 // .
 // ...
@@ -163,7 +163,7 @@ In the `/pages` directory, create the following structure.
 
 Open `/pages/api/views/[slug].ts` in your editor of choice, and create the handler function.
 
-```ts showLineNumbers title="/pages/api/view/[slug].ts"
+```ts showLineNumbers
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 
@@ -177,7 +177,7 @@ export default async function handler(
 
 We want to handle two cases, the `POST` and the `GET`. We also want to make sure we have adequate error handling.
 
-```ts showLineNumbers title="/pages/api/view/[slug].ts" {9-22}
+```ts showLineNumbers {9-22}
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 
@@ -207,7 +207,7 @@ On the `POST`, we will use the prisma client's `upsert` method to handle the
 request. Basically, we will increment the view field on update, or create a
 new record with the slug.
 
-```ts showLineNumbers title="/pages/api/view/[slug].ts" {14-29}
+```ts showLineNumbers {14-29}
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 
@@ -251,7 +251,7 @@ export default async function handler(
 The `GET` is simpler, we will just find the unique record associated with the
 slug.
 
-```ts showLineNumbers title="/pages/api/view/[slug].ts" {34-40}
+```ts showLineNumbers {34-40}
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 
@@ -318,7 +318,7 @@ export type Views = {
 
 Then, we can use the Nodejs `fetch` to get the views from the database through our API.
 
-```typescript showLineNumbers title="/lib/usePostViews.ts" {5, 7-13}
+```typescript showLineNumbers {5, 7-13}
 export type Views = {
   total: number;
 };
@@ -336,7 +336,7 @@ async function getPostViews(slug: string): Promise<Views> {
 
 After that, we can also handle the update method
 
-```typescript showLineNumbers title="/lib/usePostViews.ts" {15-21}
+```typescript showLineNumbers {15-21}
 export type Views = {
   total: number;
 };
@@ -362,7 +362,7 @@ async function updatePostViews(slug: string): Promise<Views> {
 
 And finally, we can use [SWR](https://swr.vercel.app), a tool built by the people over at Vercel, to then define our `usePostViews` hook.
 
-```typescript showLineNumbers title="/lib/usePostViews.ts" {1, 25-52}
+```typescript showLineNumbers {1, 25-52}
 import useSWR, { SWRConfiguration } from "swr";
 
 export type Views = {
@@ -380,14 +380,22 @@ async function getPostViews(slug: string): Promise<Views> {
 }
 
 async function updatePostViews(slug: string): Promise<Views> {
-	const res = await fetch(`${API_URL}/${slug}`, { method: "POST" });
+	const res = await fetch(
+    `${API_URL}/${slug}`, 
+    { 
+      method: "POST" 
+    }
+  );
 	if (!res.ok) {
 		throw new Error("An error occured while updating views");
 	}
 	return res.json();
 }
 
-export const usePostViews = (slug: string, config?: SWRConfiguration) => {
+export const usePostViews = (
+  slug: string, 
+  config?: SWRConfiguration
+) => {
 	const { data, error, mutate } = useSWR<Views>(
 		`${API_URL}/${slug}`,
 		() => getPostViews(slug),
@@ -427,7 +435,7 @@ So how do we fix that?
 
 Well, we represent the concept of a `Session` within our database. We will utilize the user's IP address (hashed for privacy) along with the slug of the article to generate a ID for the row in the database, and each row in the database will represent a like.
 
-```prisma showLineNumbers title="/prisma/schema.prisma" {5, 9-12}
+```prisma showLineNumbers {5, 9-12}
 // ...
 
 model Stats {
@@ -462,7 +470,7 @@ yarn add crypto
 
 Be sure to add a `IP_ADDRESS_SALT` to your `.env` file, and then you can use the `createHash` method to hash the user's IP address.
 
-```typescript showLineNumbers title="/pages/api/likes/[slug].ts"
+```typescript showLineNumbers
 import prisma from "@/lib/prisma";
 import { createHash } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -492,7 +500,7 @@ export default async function handler(
 
 We can use this `userId` to create an ID for our session.
 
-```typescript showLineNumbers title="/pages/api/likes/[slug].ts" {21}
+```typescript showLineNumbers {21}
 import prisma from "@/lib/prisma";
 import { createHash } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -524,7 +532,7 @@ export default async function handler(
 
 To handle the `GET`, we will need to return whether the current user (IP address) has previously liked this article, and the number of likes for the article. We can accomplish this using a `Promise.all`
 
-```typescript showLineNumbers title="/pages/api/likes/[slug].ts" {23-37}
+```typescript showLineNumbers {23-37}
 import prisma from "@/lib/prisma";
 import { createHash } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -572,7 +580,7 @@ export default async function handler(
 
 Then, to handle the `POST`, we will need to determine whether there exists a row in the `Session` table that matches the user's IP. If there is a row, there is no change to the number of likes. Otherwise, we create a new row in the `Session` table and increment the number of likes in the `Stats` table.
 
-```typescript showLineNumbers title="/pages/api/likes/[slug].ts" {39-69}
+```typescript showLineNumbers {39-69}
 import prisma from "@/lib/prisma";
 import { createHash } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -652,7 +660,7 @@ export default async function handler(
 
 Finally, we want to allow user's to un-like the post (sadly), so we want to handle the `DELETE`. Here, we will remove the user's IP from the `Session` table, and decrement the `likes` column in the `Stats` table.
 
-```ts showLineNumbers title="/pages/api/likes/[slug].ts" {71-93}
+```ts showLineNumbers {71-93}
 import prisma from "@/lib/prisma";
 import { createHash } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -757,7 +765,7 @@ export default async function handler(
 
 Similar to the hook for an article's views, we will start by defining the return type for the API call.
 
-```ts showLineNumbers title="/lib/usePostLikes.ts"
+```ts showLineNumbers
 export type Likes = {
   total?: number;
   user?: boolean;
@@ -766,7 +774,7 @@ export type Likes = {
 
 Then we will define the method that preforms the `GET` for us.
 
-```ts showLineNumbers title="/lib/usePostLikes.ts" {6, 8-14}
+```ts showLineNumbers {6, 8-14}
 export type Likes = {
   total?: number;
   user?: boolean;
@@ -785,7 +793,7 @@ async function getPostLikes(slug: string): Promise<Likes> {
 
 After that, we can handle the `POST` calls and `DELETE` calls.
 
-```ts showLineNumbers title="/lib/usePostLikes.ts" {19-28, 30-39}
+```ts showLineNumbers {19-28, 30-39}
 import React from "react";
 import useSWR, { SWRConfiguration } from "swr";
 
@@ -829,7 +837,7 @@ async function deletePostLikes(slug): Promise<Likes> {
 
 Once we have those methods defined, we can create the actual hook to be used inside our component.
 
-```ts showLineNumbers title="/lib/usePostLikes.ts" {41-89}
+```ts showLineNumbers {41-89}
 import React from "react";
 import useSWR, { SWRConfiguration } from "swr";
 
@@ -925,12 +933,11 @@ export const usePostLikes = (slug: string, config?: SWRConfiguration) => {
 
 The "complicated" part is now out of the way, so we can move on to displaying our metrics. I will start with a simple `<span>` component that simply displays the numerical value.
 
-```tsx showLineNumbers title="/ui/metric.tsx"
+```tsx showLineNumbers
 export const Metric = ({ stat }: { stat: number | undefined }) => {
   return (
     <span
       className="-mx-0.5 animate-[mutation_2s_ease-in-out_1] rounded-md px-0.5 slashed-zero tabular-nums tracking-tight"
-      Ï
     >
       {stat?.toLocaleString()}
     </span>
@@ -944,11 +951,14 @@ Before we can do that, we need to introduce the concept of polling into our appl
 
 Create a new file in `/lib` called `usePolling.ts`. In this file, we will define a hook to poll on an interval.
 
-```ts showLineNumbers title="/lib/usePolling.ts"
+```ts showLineNumbers
 import React from "react";
 import { useIntersection, useInterval } from "react-use";
 
-export const usePolling = (interval: number = 1000, max: number = 3) => {
+export const usePolling = (
+  interval: number = 1000, 
+  max: number = 3
+) => {
   const intersectionRef = React.useRef(null);
   const intersection = useIntersection(intersectionRef, {});
 
@@ -984,7 +994,7 @@ export const usePolling = (interval: number = 1000, max: number = 3) => {
 
 We can then use this hook to determine when we should poll for new data within the article metrics display.
 
-```tsx showLineNumbers title="/ui/post-metrics.tsx"
+```tsx showLineNumbers
 import { usePolling } from "@/lib/usePolling";
 import { usePostViews } from "@/lib/usePostViews";
 
@@ -1046,14 +1056,16 @@ We can use the `increment` from `usePostViews` to increment the number of views 
   and `componentWillUnmount` combined.
 </Aside>
 
-```tsx showLineNumbers title="/ui/view-counter.tsx"
+```tsx showLineNumbers
 import { usePolling } from "@/lib/usePolling";
 import { usePostViews } from "@/lib/usePostViews";
 
 import { LoadingDots } from "./loading";
 import { Metric } from "./metric";
 
-export default function ViewCounter = ({ slug } : { slug: string }) => {
+export default function ViewCounter = (
+  { slug } : { slug: string }
+) => {
 	const interval = 5000;
 	const { shouldPoll, intersectionRef } = usePolling(interval);
 
@@ -1086,14 +1098,16 @@ export default function ViewCounter = ({ slug } : { slug: string }) => {
 
 On the flip side, you can also use `increment` and `decrement` within a button's `onClick` member.
 
-```tsx showLineNumbers title="/ui/likes-counter"
+```tsx showLineNumbers
 import { usePolling } from "@/lib/usePolling";
 import { usePostLikes } from "@/lib/usePostLikes";
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
 import { LoadingDots } from "./loading";
 import { Metric } from "./metric";
 
-export default const LikeCounter = ({ slug } : { slug: string }) => {
+export default const LikeCounter = (
+  { slug } : { slug: string }
+) => {
 	const interval = 5000;
 	const { shouldPoll, intersectionRef } = usePolling(interval);
 
@@ -1112,7 +1126,7 @@ export default const LikeCounter = ({ slug } : { slug: string }) => {
 				)} likes
 			</div>
 			<button
-				className={`hover:text-white/60 ${user ? "text-blue-300": ""}`}
+				className={`hover:text-white/60 ${user ? "text-blue-300" : ""}`}
 				onClick={() => {
 					if (isLoading) { return };
 					if (user) {

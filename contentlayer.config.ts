@@ -7,6 +7,7 @@ import { Post } from "./content/def/post";
 
 const codeOptions: Options = {
   keepBackground: false,
+  theme: 'vitesse-dark'
 };
 
 export default makeSource({

@@ -24,9 +24,11 @@ export default function Page({ params }: { params: { slug: string } }) {
     <section className="pt-8">
       <div className="pb-4">
         <h1 className="font-serif font-bold text-6xl pb-4">{post.title}</h1>
-        <p className="">{moment(post.published).format("MMMM Do, YYYY")}</p>
+        <p className="font-medium text-gray-200">
+          {moment(post.published).format("MMMM Do, YYYY")}
+        </p>
       </div>
-      <section className="flex flex-col space-y-2">
+      <section className="flex flex-col space-y-4">
         <MDXContent components={components} />
       </section>
     </section>

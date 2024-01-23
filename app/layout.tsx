@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} ${fraunces.variable} flex flex-col items-center w-screen`}
+      className={`${nunito.variable} ${fraunces.variable} flex flex-col items-center w-screen text-text`}
     >
       <body className="max-w-4xl pt-12 bg-black">
         <Nav />

@@ -20,7 +20,7 @@ I’m using a Next.JS 13 app directory project, though I am sure most of the bas
 
 I am using [Apollo](https://www.apollographql.com/blog/using-apollo-client-with-next-js-13-releasing-an-official-library-to-support-the-app-router) to query Literal’s API for client-sided queries. The first step to getting this up and running is to create a React Context that provides the Apollo client to the rest of the application.
 
-```ts
+```tsx showLineNumbers
 "use client";
 
 import { ApolloLink, HttpLink } from "@apollo/client";
@@ -79,7 +79,7 @@ export function LiteralContext({
 
 Then, wrap it around your content in `layout.tsx`.
 
-```ts
+```tsx showLineNumbers
 import { LiteralContext } from "@/context/literal";
 
 // ....
@@ -93,7 +93,7 @@ export default function Root({
 		<html>
 			<body>
 				<LiteralContext>
-					// ... content
+					{ /* any content here */ }
 				</LiteralContext>
 			</body>
 		</html>
@@ -123,7 +123,7 @@ Grab the token and the profileId from the response and put those in your ENV fil
 
 For type info, you can define these models (and any other fields you want to use, full list [here](https://literal.club/pages/api)).
 
-```ts 
+```ts showLineNumbers
 export type Author = {
   name: string;
   id?: string;
@@ -142,7 +142,7 @@ export type Book = {
 
 Once that is done, you can use `useSuspenseQuery` to query the API.
 
-```ts
+```tsx showLineNumbers
 "use client";
 
 import { useSuspenseQuery } from "@apollo/client";
@@ -174,7 +174,10 @@ export default function ReadingPreview {
 	// filter when getting data to find book with status
 	// 'IS_READING'
 	useEffect(() => {
-		const current = (data as any)?.myReadingStates?.filter((s) => s.status === 'IS_READING')?.[0];
+		const current = (data as any)?
+        .myReadingStates?
+        .filter((s) => s.status === 'IS_READING')?
+        .[0];
 		setBook(current.book as Book);
 	}, [data])
 	
@@ -190,13 +193,19 @@ export default function ReadingPreview {
 	        />
 	        <div className="col-span-2">
 	          <div className="pb-2">
-	            <h4 className="font-serif font-semibold text-[#ffffff]">
+	            <h4 
+                className="font-serif font-semibold text-[#ffffff]">
 	              {book.title}
 	            </h4>
-	            <p>{book.authors?.map((a) => a.name).join(", ")}</p>
+	            <p>
+                {
+                  book.authors?.map((a) => a.name).join(", ")
+                }
+              </p>
 	          </div>
 	          <p>{book.description?.slice(0, 120).concat("...")}</p>
-	          <div className="flex justify-end text-[#7F7F7F] hover:underline hover:decoration-wavy hover:text-[#ffffff]">
+	          <div 
+              className="flex justify-end text-[#7F7F7F] hover:underline hover:decoration-wavy hover:text-[#ffffff]">
 	            <Link href={"/books"}>read more</Link>
 	          </div>
 	        </div>
@@ -212,7 +221,7 @@ On the Server Side of things, I decided to just use asynchronous fetch (partiall
 
 Because the Literal API has you retrieve read dates by a different query, I used this method to retrieve all read books, and combine the object with the read dates.
 
-```ts
+```tsx showLineNumbers
 async function getBooks() {
   const data = (
     (await fetch("https://literal.club/graphql/", {

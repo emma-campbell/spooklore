@@ -21,4 +21,10 @@ export const components: MDXComponents = {
   li: ({ children }) => {
     return <li className="list-decimal list-inside space-y-1">{children}</li>;
   },
+  blockquote: ({ children }) => {
+    return <blockquote className="border-l-4 pl-2 bg-white/5 rounded-md">{children}</blockquote>
+  },
+  strong: ({children}) => {
+    return <strong className="font-bold">{children}</strong>
+  }
 };

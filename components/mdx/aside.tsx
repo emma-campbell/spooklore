@@ -13,7 +13,7 @@ export const Aside = ({
   title?: string;
 }) => {
   return (
-    <div className="bg-white/10 px-2 py-2 rounded-md mt-2 mb-2">
+    <div className="bg-white/10 px-2 py-2 rounded-md mt-2 mb-2 border-l-2">
       {title ? (
         <div className="mb-2 text-base italic text-opacity-100">{title}</div>
       ) : null}

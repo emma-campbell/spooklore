@@ -19,7 +19,7 @@ We will add reading time by adding a new computed field to our post model and de
 
 We previously kept our type definitions in `/content/defintions`. Create a new file `reading-time.ts` and then use contentlayer's `defineNestedType` to create the new type.
 
-```typescript showLineNumbers title="/content/defintions/reading-time.ts"
+```typescript showLineNumbers
 import { defineNestedType } from "contentlayer/source-files";
 
 export const ReadingTime = defineNestedType(() => {
@@ -41,7 +41,7 @@ export const ReadingTime = defineNestedType(() => {
 
 Next, open up the post definition file at `/content/definitions/post.ts` and define the new computed field.
 
-```typescript showLineNumbers title="/content/defintions/post.ts" {17-24}
+```typescript showLineNumbers {17-24}
 import { defineDocumentType } from "contentlayer/source-files";
 import GithubSlugger from "github-slugger";
 import { Tag } from "./tag";
@@ -63,7 +63,10 @@ export const Post = defineDocumentType(() => ({
       of: ReadingTime,
       resolve: (doc) => {
         const time = readingTime(doc.body.raw);
-        return { minutes: Math.floor(time.minutes), words: time.words };
+        return { 
+          minutes: Math.floor(time.minutes), 
+          words: time.words 
+        };
       },
     },
   },
@@ -74,9 +77,9 @@ Now, we contentlayer generates the typesafe JSON, each post will have a new fiel
 
 You can then display in a component however you like, accessing those members as follows:
 
-```typescript
+```tsx
 <ReadingTime
 	minutes={post.readingTime?.minutes}
 	words={post.readingTime?.words}
-></ReadingTime>
+/>
 ```

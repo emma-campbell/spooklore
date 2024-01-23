@@ -147,7 +147,7 @@ rm -rf node_modules && yarn import && yarn && rm -rf package-lock.json
 
 Then, you will want to modify `.vscode/tasks.json` to remove all npm references.
 
-```json showLineNumbers title=".vscode/tasks.json" {10,14-16,21-22,26-28}
+```json showLineNumbers {10,14-16,21-22,26-28}
 {
 	"version": "2.0.0",
 	"tasks": [
@@ -184,7 +184,7 @@ Then, you will want to modify `.vscode/tasks.json` to remove all npm references.
 
 Then do the same in `.vscode/settings.json`.
 
-```json showLineNumbers title=".vscode/settings.json" {3,7}
+```json showLineNumbers {3,7}
 {
 	"azureFunctions.deploySubpath": ".",
 	"azureFunctions.postDeployTask": "yarn install (functions)",
@@ -225,7 +225,7 @@ The only thing we will need in order to grant it access to your projects is a pe
 
 Once you have your token, create a `.env` file in the root directory of the project with the following
 
-```sh showLineNumbers title=".env"
+```sh showLineNumbers
 AZURE_PAT="<YOUR_TOKEN>"
 ```
 
@@ -243,7 +243,7 @@ Using `azure-devops-node-api` isn't too complex, but does require a minor bit of
 
 We will start by defining a method that will get our environment variables for us.
 
-```typescript showLineNumbers title="utilities.ts"
+```typescript showLineNumbers
 function getEnv(name: string): string {
 	const val = process.env[name];
 	if (!val) {
@@ -258,7 +258,7 @@ Basically, this will prevent our code from running if it can't find the environm
 
 Next, we will define a method called `getApi`. This will return the webApi from `azure-devops-node-api`.
 
-```typescript showLineNumbers title="utilities.ts" {1-2, 13-26}
+```typescript showLineNumbers {1-2, 13-26}
 import * as az from 'azure-devops-node-api';
 import * as lc from 'azure-devops-node-api/interfaces/LocationsInterfaces';
 
@@ -296,7 +296,7 @@ This code does a few things.
 
 Finally, we will just wrap a handler around this method so that we can either pass in a baseUrl or use one from the environment.
 
-```typescript showLineNumbers title="utilities.ts" {28-31}
+```typescript showLineNumbers {28-31}
 import * as az from 'azure-devops-node-api';
 import * as lc from 'azure-devops-node-api/interfaces/LocationsInterfaces';
 
@@ -334,7 +334,7 @@ export async function getWebApi(baseUrl?: string): Promise<az.WebApi> {
 
 The next part of this tasks is to setup the trigger for the function. If you open up `index.ts` in the function folder, you will see the following
 
-```typescript showLineNumbers title="changeset-check/index.ts"
+```typescript showLineNumbers
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
@@ -356,7 +356,7 @@ export default httpTrigger;
 
 This method defines the trigger that will be hit once a PR is created or modified. Azure will `POST` to the URL of this function, with the following information.
 
-```json title="sample.dat"
+```json
 {
 	"resource": {
 		"pullRequestId": "<ID>",
@@ -375,7 +375,7 @@ This method defines the trigger that will be hit once a PR is created or modifie
 
 This information gives us everything we need to know in order to modify the PR and check for changesets. We will start out with parsing the relevant information from the request body and initializing the connection to Azure's WebApi.
 
-```typescript showLineNumbers title="changeset-check/index.ts" {2, 4-5, 8, 11-18}
+```typescript showLineNumbers {2, 4-5, 8, 11-18}
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { WebApi } from "azure-devops-node-api";
 
@@ -401,7 +401,7 @@ export default httpTrigger;
 
 Then, get the `GitApi` and all of the relevant PR information.
 
-```typescript showLineNumbers title="changeset-check/index.ts" {3, 21, 23-31}
+```typescript showLineNumbers {3, 21, 23-31}
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { WebApi } from "azure-devops-node-api";
 import { IGitApi, GitPullRequest } from "azure-devops-node-api/interfaces/GitInterfaces";
@@ -444,7 +444,7 @@ export default httpTrigger;
 
 Let's use a class to represent all the bot operations we wish to perform. Create a new file in the function directory, called `changebot.ts` and create a new class. Our constructor for this class will take the parameters `api` to interact with Azure's GitApi and `pr` to have the relevant pull request information.
 
-```typescript showLineNumbers title="changebot.ts" {}
+```typescript showLineNumbers
 import { IGitApi } from "azure-devops-node-api/GitApi";
 import { GitPullRequest } from "azure-devops-node-api/interfaces/GitInterfaces";
 
@@ -461,7 +461,7 @@ export default class ChangeBot {
 
 We will then define a public method, called `check` which will check for the changeset files, and push any `CHANGELOG.md` and `package.json` changes.
 
-```typescript showLineNumbers title="changebot.ts" {4-7, 18-27}
+```typescript showLineNumbers {4-7, 18-27}
 import { IGitApi } from "azure-devops-node-api/GitApi";
 import { GitPullRequest } from "azure-devops-node-api/interfaces/GitInterfaces";
 
@@ -500,7 +500,7 @@ The return type, `ChangebotResult` returns a list of threads created by the bot,
 
 Create a private method called `hasChangeset`. You won't need any parameters to perform this, because we already have everything we need stored as members of the class.
 
-```typescript showLineNumbers title="changebot.ts" {4-7, 31, 35-42}
+```typescript showLineNumbers {4-7, 31, 35-42}
 import { IGitApi } from "azure-devops-node-api/GitApi";
 import { GitPullRequest } from "azure-devops-node-api/interfaces/GitInterfaces";
 
@@ -554,7 +554,7 @@ Generally, we will want to do the following within this method.
 
 We can update the list of changed files using the GitApi by doing the following
 
-```typescript showLineNumbers title="changebot.ts > updateFiles()"
+```typescript showLineNumbers
 /**
  * Create a list of all changed files
  */
@@ -570,7 +570,7 @@ private async updateFiles(): Promise<Result> {
 
 and updating the git interface imports to
 
-```typescript showLineNumbers title="changebot.ts" {3}
+```typescript showLineNumbers {3}
 import { IGitApi } from "azure-devops-node-api/GitApi";
 import { 
 	GitChange, 
@@ -580,7 +580,7 @@ import {
 
 We can then use this to get a list of all changed files and search it for changesets.
 
-```typescript showLineNumbers title="changebot.ts" {13-28}
+```typescript showLineNumbers {13-28}
 export default class Changebot {
 	// ...
 	// .
@@ -615,7 +615,7 @@ export default class Changebot {
 
 Now that we've determined if the PR has at least one changeset file, we will create a comment thread detailing its status.
 
-```typescript showLineNumbers title="changebot.ts"
+```typescript showLineNumbers
 export default class Changebot {
 	// ...
 	// .
@@ -681,7 +681,7 @@ export default class Changebot {
 
 You will also need to update the imports in `changebot.ts` to the following:
 
-```typescript showLineNumbers title="changebot.ts" {3}
+```typescript showLineNumbers {3}
 import { IGitApi } from "azure-devops-node-api/GitApi";
 import {
 	CommentThreadStatus,
@@ -694,7 +694,7 @@ import {
 
 You may have noticed in the above snippet that I called `this.threads.setThreadStatus` and `this.threads.upsertThread`. To manage threads, I created a new file called `thread-manager.ts` with a class called `ThreadManager`. This class will also use Azure's GitApi to manage different threads on the PR.
 
-```typescript showLineNumbers title="thread-manager.ts"
+```typescript showLineNumbers
 import { IGitApi } from "azure-devops-node-api/GitApi";
 import { GitPullRequest } from "azure-devops-node-api/interfaces/GitInterfaces";
 
@@ -722,7 +722,7 @@ Because this article is already lengthy and interacting with threads in Azure is
 
 Create a new method in `ChangeBot` called `generateChangelog`.
 
-```typescript showLineNumbers title="changebot.ts"
+```typescript showLineNumbers
 export default class Changebot {
 	// ...
 	// .
@@ -758,7 +758,7 @@ yarn add \
 
 You'll want to create a new utility method that gets an entry from the Changelog. This code is lifted directly from the [Changeset Github Action](https://github.com/changesets/action/blob/main/src/utils.ts).
 
-```typescript showLineNumbers title="utils.ts"
+```typescript showLineNumbers
 /**
  * Semantic "Bump" Versions
  */
@@ -831,7 +831,7 @@ export async function getChangelogEntry(changelog: string, version: string) {
 
 Using this code, we can do the following in our changelog generation method:
 
-```typescript showLineNumbers title="changebot.ts" {1-9, 11, 22-45}
+```typescript showLineNumbers {1-9, 11, 22-45}
 import { CommitResult, PushResult } from 'simple-git';
 import getChangesets from "@changesets/read";
 import getReleasePlan from "@changesets/get-release-plan";
@@ -887,7 +887,7 @@ From there, you can create a new thread in the same way that we did for the chan
 
 Go back the the `changebot.ts` file, 
 
-```typescript showLineNumbers title="changebot.ts"
+```typescript showLineNumbers
 export default class Changebot {
 	// ...
 	// .
@@ -921,7 +921,7 @@ export default class Changebot {
 
 Head back to the index file, and create a new `ChangeBot` instance to be able to run the check.
 
-```typescript showLineNumbers title="changeset-check/index.ts" {3, 21, 23-31}
+```typescript showLineNumbers {3, 21, 23-31}
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { WebApi } from "azure-devops-node-api";
 import { IGitApi, GitPullRequest } from "azure-devops-node-api/interfaces/GitInterfaces";
