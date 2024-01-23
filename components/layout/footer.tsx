@@ -8,6 +8,7 @@ export const Footer = () => {
       <div className="flex flex-col pt-4 text-[#898989] items-center">
         <div className="flex flex space-x-2">
           <Link href='/colophon'>colophon</Link>
+          <Link href='/rss'>rss</Link>
           <Link href='/blogroll'>blogroll</Link>
           <Link href="/uses">uses</Link>
           <Link href="/now">now</Link>

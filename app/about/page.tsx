@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function About() {
   return (
     <>
-      <section className="grid grid-cols-2 pt-8">
+      <section className="flex flex-col flex-col-reverse sm:grid sm:grid-cols-2 pt-8">
         <div className="space-y-8 font-md decoration-wavy">
           <p>
             My name is Emma. I am a software engineer from Columbus, OH
@@ -26,7 +26,7 @@ export default function About() {
             When I am not working, I like to write, watch soccer, and read. I
             occasionally play video games.
           </p>
-          <div className="flex flex-row space-x-4">
+          <div className="flex flex-row space-x-4 pb-6 sm:pb-0">
             <Link href="https://github.com/emma-campbell">
               <svg
                 className="fill-[#7F7F7F] w-6 h-6 hover:fill-[#ffffff]"
@@ -62,7 +62,7 @@ export default function About() {
             priority
             src={Portrait}
             alt="Photo of Emma"
-            className="w-full rounded-md"
+            className="w-full mb-4 sm:mb-0 rounded-md"
           />
         </div>
       </section>
