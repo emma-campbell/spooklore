@@ -69,7 +69,6 @@ async function getBooks() {
       finished: date?.finished,
     };
 
-    console.log(b);
     if (b.finished != null) {
       const year = moment(b.finished).year();
 

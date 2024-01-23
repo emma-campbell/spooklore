@@ -6,6 +6,7 @@ import { Nav } from "@/components/layout/nav";
 import { LiteralWrapper } from "@/context/literal";
 import type { Metadata } from "next";
 import { Fraunces, Nunito_Sans } from "next/font/google";
+
 import "./globals.css";
 
 const nunito = Nunito_Sans({
