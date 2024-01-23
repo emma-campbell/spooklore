@@ -28,11 +28,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${nunito.variable} ${fraunces.variable}`}>
-      <body className="antialiased max-w-3xl my-8 flex flex-col mx-4 lg:mt-20 lg:mx-auto font-sans items-center bg-black min-h-svh">
+    <html
+      lang="en"
+      className={`${nunito.variable} ${fraunces.variable} flex flex-col items-center w-screen`}
+    >
+      <body className="max-w-4xl pt-12 bg-black">
+        <Nav />
         <LiteralWrapper>
-          <Nav />
-          <main className="min-w-0 flex flex-col px-2 md:px-0 max-w-2xl justify-items-center text-[#D7D7D7]">
+          <main className="max-w-2xl min-h-svh px-2 md:px-0 text-[#D7D7D7]">
             {children}
           </main>
         </LiteralWrapper>

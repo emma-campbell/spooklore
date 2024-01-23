@@ -1,0 +1,292 @@
+---
+title: Displaying Book on my Site using Literal.Club
+published: 01-15-2024
+status: "published"
+---
+
+Everyone and their mothers always makes a goal to read more books at the start of every given year. Last year, I read more than I hoped, but on the previous version of my site had a tracker that was pretty tedious to use.
+
+I want to display my book reading superiority so that everyone can see (a not-so-humble brag, if you will).
+
+In the past I’ve used Goodreads to track all of my books. However, Goodreads deprecated their developer program a while back so if you don’t have an existing token you’re shit out of luck.
+
+In my search for the perfect book tracker, I stumbled upon [Literal](https://literal.club/). It’s like Goodreads, but their UI is from this century _and_ they have an open GraphQL API. It’s like they knew I wanted to show off.
+
+So after signing up, I imported my Goodreads library (looks like they’re one of the lucky ones with a live developer token 🤨) and got to work displaying my current read and favorites shelf on my site.
+
+I’m using a Next.JS 13 app directory project, though I am sure most of the basic principles can slide over to any library.
+
+## Client Components
+
+I am using [Apollo](https://www.apollographql.com/blog/using-apollo-client-with-next-js-13-releasing-an-official-library-to-support-the-app-router) to query Literal’s API for client-sided queries. The first step to getting this up and running is to create a React Context that provides the Apollo client to the rest of the application.
+
+```ts
+"use client";
+
+import { ApolloLink, HttpLink } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import {
+  ApolloNextAppProvider,
+  NextSSRApolloClient,
+  NextSSRInMemoryCache,
+  SSRMultipartLink,
+} from "@apollo/experimental-nextjs-app-support/ssr";
+
+export const getClient = () => {
+  const authLink = setContext((_, { headers }) => {
+    const token = process.env.NEXT_PUBLIC_LITERAL_TOKEN;
+
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  });
+
+  const link = new HttpLink({
+    uri: "https://literal.club/graphql/",
+    fetchOptions: {
+      cache: "no-store",
+    },
+  });
+
+  return new NextSSRApolloClient({
+    cache: new NextSSRInMemoryCache(),
+    link:
+      typeof window === "undefined"
+        ? ApolloLink.from([
+            new SSRMultipartLink({
+              stripDefer: true,
+            }),
+            authLink,
+            link,
+          ])
+        : ApolloLink.from([authLink, link]),
+  });
+};
+
+export function LiteralContext({
+  children,
+}: React.PropsWithChildren) {
+  return (
+    <ApolloNextAppProvider makeClient={getClient}>
+      {children}
+    </ApolloNextAppProvider>
+  );
+}
+```
+
+Then, wrap it around your content in `layout.tsx`.
+
+```ts
+import { LiteralContext } from "@/context/literal";
+
+// ....
+
+export default function Root({ 
+	children
+}: { children; React.ReactNode }) {
+	
+	// ...
+	return (
+		<html>
+			<body>
+				<LiteralContext>
+					// ... content
+				</LiteralContext>
+			</body>
+		</html>
+	)
+}
+```
+
+You may have noticed that I have a `LITERAL_TOKEN` and `LITERAL_PROFILE_ID` loading from my environment. To retrieve these, just `POST` to `https://literal.club/graphql`.
+
+```http
+POST /graphql/ HTTP/1.1
+Content-Length: 320
+Content-Type: application/json
+Host: literal.club
+User-Agent: HTTPie
+
+{
+	"query":"mutation login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      token\n      profile {\n        id\n        handle\n        name\n        bio\n        image\n      }\n    }\n  }",
+	"variables":{
+	  "email": "<your username>",
+	  "password": "<your password>"
+	}
+}
+``` 
+
+Grab the token and the profileId from the response and put those in your ENV file. To use client side in Next.JS, they need to be prefixed with `NEXT_PUBLIC_`.
+
+For type info, you can define these models (and any other fields you want to use, full list [here](https://literal.club/pages/api)).
+
+```ts 
+export type Author = {
+  name: string;
+  id?: string;
+};
+
+export type Book = {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+  pageCount?: number;
+  cover: string;
+  authors?: Author[];
+};
+```
+
+Once that is done, you can use `useSuspenseQuery` to query the API.
+
+```ts
+"use client";
+
+import { useSuspenseQuery } from "@apollo/client";
+import { Suspense, useEffect, useState } from "react";
+import { gql } from "@apollo/client";
+import { Book } from "@/lib/reading";
+
+const query = gql`
+  query myReadingStates {
+    myReadingStates {
+      status
+      book {
+        title
+        subtitle
+        description
+        cover
+        authors {
+          name
+        }
+      }
+    }
+  }
+`;
+
+export default function ReadingPreview {
+	const [ book, setBook ] = useState({} as Book);
+	const { data, error} = useSuspenseQuery(query);
+	
+	// filter when getting data to find book with status
+	// 'IS_READING'
+	useEffect(() => {
+		const current = (data as any)?.myReadingStates?.filter((s) => s.status === 'IS_READING')?.[0];
+		setBook(current.book as Book);
+	}, [data])
+	
+	return (
+		<Suspense>
+	      <div className="grid grid-cols-3 gap-4">
+	        <Image
+	          className="w-32 rounded-md col-span-1"
+	          src={book.cover}
+	          alt={`${book.title} cover`}
+	          width="230"
+	          height="500"
+	        />
+	        <div className="col-span-2">
+	          <div className="pb-2">
+	            <h4 className="font-serif font-semibold text-[#ffffff]">
+	              {book.title}
+	            </h4>
+	            <p>{book.authors?.map((a) => a.name).join(", ")}</p>
+	          </div>
+	          <p>{book.description?.slice(0, 120).concat("...")}</p>
+	          <div className="flex justify-end text-[#7F7F7F] hover:underline hover:decoration-wavy hover:text-[#ffffff]">
+	            <Link href={"/books"}>read more</Link>
+	          </div>
+	        </div>
+	      </div>
+	    </Suspense>
+    )
+}
+```
+
+## Server Side
+
+On the Server Side of things, I decided to just use asynchronous fetch (partially because I am _not_ a frontend person, and I had trouble trying to use the Apollo client server side lol).
+
+Because the Literal API has you retrieve read dates by a different query, I used this method to retrieve all read books, and combine the object with the read dates.
+
+```ts
+async function getBooks() {
+  const data = (
+    (await fetch("https://literal.club/graphql/", {
+      method: "POST",
+      body: JSON.stringify({
+        query: `query booksByReadingStateAndProfile(
+        $limit: Int!
+        $offset: Int!
+        $readingStatus: ReadingStatus!
+        $profileId: String!
+      ) {
+        booksByReadingStateAndProfile(limit: $limit offset: $offset readingStatus: $readingStatus profileId: $profileId) { id title authors { name } } }`,
+        variables: {
+          limit: 100,
+          offset: 0,
+          readingStatus: "FINISHED",
+          profileId: process.env.NEXT_PUBLIC_LITERAL_PROFILE_ID,
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        authorization: process.env.LITERAL_TOKEN ?? "",
+      },
+    }).then((res) => res.json())) as any
+  ).data;
+
+  const books = new Map<number, any>();
+
+  for (const book of data.booksByReadingStateAndProfile) {
+    const dates = (
+      (await fetch("https://literal.club/graphql/", {
+        method: "POST",
+        body: JSON.stringify({
+          query: `query getReadDates($bookId: String!, $profileId: String!) {
+            getReadDates(bookId: $bookId, profileId: $profileId) {
+              started
+              finished
+            }
+          }`,
+          variables: {
+            bookId: book.id,
+            profileId: process.env.NEXT_PUBLIC_LITERAL_PROFILE_ID,
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          authorization: process.env.LITERAL_TOKEN ?? "",
+        },
+      }).then((res) => res.json())) as any
+    ).data;
+
+    const date = dates?.getReadDates?.pop();
+
+    const b = {
+      ...book,
+      started: date?.started,
+      finished: date?.finished,
+    };
+
+    if (b.finished != null) {
+      const year = moment(b.finished).year();
+
+      let read = books.get(year);
+      if (read == null) {
+        read = [b];
+        books.set(year, read);
+      } else {
+        read.push(b);
+      }
+    }
+  }
+
+  return books;
+}
+```
+
+This returns a map, where the keys of the map are years and the content is an array of books.
