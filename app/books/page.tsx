@@ -23,7 +23,7 @@ async function getBooks() {
       ) {
         booksByReadingStateAndProfile(limit: $limit offset: $offset readingStatus: $readingStatus profileId: $profileId) { id title authors { name } } }`,
         variables: {
-          limit: 500,
+          limit: 600,
           offset: 0,
           readingStatus: "FINISHED",
           profileId: process.env.NEXT_PUBLIC_LITERAL_PROFILE_ID,
