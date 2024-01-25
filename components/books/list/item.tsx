@@ -9,19 +9,20 @@ export function BookListItem({
 }: {
   book: Book & { started: string; finished: string };
 }) {
-  const [width, setWidth] = useState<number>(window.innerWidth);
+  const [width, setWidth] = useState<number>();
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
+
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
-  }, []);
+  }, [width]);
 
-  const isMobile = width <= 768;
+  const isMobile = width ?? 1000 <= 768;
 
   if (isMobile) {
     return (

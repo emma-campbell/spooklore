@@ -28,19 +28,20 @@ export default function FavoriteBooks() {
     setBooks((data as any)?.shelf.books as Book[]);
   }, [data]);
 
-  const [width, setWidth] = useState<number>(window.innerWidth);
+  const [width, setWidth] = useState<number>();
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
+
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
-  }, []);
+  }, [width]);
 
-  const isMobile = width <= 768;
+  const isMobile = width ?? 1000 <= 768;
 
   return (
     <Suspense>
