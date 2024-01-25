@@ -93,7 +93,7 @@ export default async function Books() {
   });
   return (
     <>
-      <section id="currently_reading" className="pt-24 flex-col space-y-12">
+      <section id="currently_reading" className="pt-24 flex flex-col space-y-12 items-center">
         <Suspense>
           <CurrentlyReading />
         </Suspense>

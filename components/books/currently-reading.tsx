@@ -37,7 +37,7 @@ export default function CurrentlyReading() {
 
   return (
     <Suspense>
-      <div className="bg-[#7F7F7F]/10 min-w-full h-64 rounded-md px-28 flex flex-col items-center [&_*]:-top-20 [&_*]:relative">
+      <div className="bg-[#7F7F7F]/10 w-11/12 sm:min-w-full h-64 rounded-md sm:px-28 flex flex-col items-center [&_*]:-top-20 [&_*]:relative">
         <Image
           priority
           className="w-32 relative rounded-md"
@@ -46,7 +46,7 @@ export default function CurrentlyReading() {
           width="230"
           height="500"
         />
-        <h1 className="font-serif text-5xl pt-4">currently reading</h1>
+        <h1 className="font-serif text-4xl sm:text-5xl pt-4">currently reading</h1>
         <p className="pt-2">
           {book.title} | {book.authors?.map((a) => a.name).join(", ")}
         </p>

@@ -31,12 +31,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} ${fraunces.variable} flex flex-col items-center w-screen text-text`}
+      className={`${nunito.variable} ${fraunces.variable} w-full items-center text-text`}
     >
-      <body className="max-w-4xl pt-12 bg-black">
+      <body className="max-w-4xl pt-12 bg-black mx-auto">
         <Nav />
         <LiteralWrapper>
-          <main className="max-w-2xl min-h-svh px-2 md:px-0 text-[#D7D7D7]">
+          <main className="max-w-2xl min-h-svh px-2 md:px-0 text-[#D7D7D7] mx-auto">
             {children}
           </main>
         </LiteralWrapper>
