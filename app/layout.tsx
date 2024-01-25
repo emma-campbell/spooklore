@@ -36,7 +36,7 @@ export default function RootLayout({
       <body className="max-w-4xl pt-12 bg-black mx-auto">
         <Nav />
         <LiteralWrapper>
-          <main className="max-w-2xl min-h-svh px-2 md:px-0 text-[#D7D7D7] mx-auto">
+          <main className="max-w-2xl px-2 md:px-0 text-[#D7D7D7] mx-auto">
             {children}
           </main>
         </LiteralWrapper>

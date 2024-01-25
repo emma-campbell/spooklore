@@ -25,7 +25,7 @@ export default function Thoughts() {
 
   return (
     <>
-      <section className="flex flex-col space-y-12">
+      <section className="flex flex-col space-y-12 pt-8">
         <p>This is where I write my thoughts. Take a look around!</p>
         <section className="flex flex-col space-y-8">
           {posts.map((entry) => {
