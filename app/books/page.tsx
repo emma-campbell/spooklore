@@ -33,6 +33,7 @@ async function getBooks() {
         "Content-Type": "application/json",
         authorization: process.env.LITERAL_TOKEN ?? "",
       },
+      cache: 'reload'
     }).then((res) => res.json())) as any
   ).data;
 
