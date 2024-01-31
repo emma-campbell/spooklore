@@ -33,7 +33,10 @@ async function getBooks() {
         "Content-Type": "application/json",
         authorization: process.env.LITERAL_TOKEN ?? "",
       },
-      cache: 'reload'
+      cache: "reload",
+      next: {
+        revalidate: 3600,
+      },
     }).then((res) => res.json())) as any
   ).data;
 
@@ -58,6 +61,9 @@ async function getBooks() {
         headers: {
           "Content-Type": "application/json",
           authorization: process.env.LITERAL_TOKEN ?? "",
+        },
+        next: {
+          revalidate: 3600,
         },
       }).then((res) => res.json())) as any
     ).data;
@@ -94,7 +100,10 @@ export default async function Books() {
   });
   return (
     <>
-      <section id="currently_reading" className="pt-24 flex flex-col space-y-12 items-center">
+      <section
+        id="currently_reading"
+        className="pt-24 flex flex-col space-y-12 items-center"
+      >
         <Suspense>
           <CurrentlyReading />
         </Suspense>
