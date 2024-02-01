@@ -29,7 +29,7 @@
     "rehype-pretty-code": "^0.12.6",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^3.0.1",
-    "sharp": "^0.33.2",
+    "sharp": "0.32.6",
     "shikiji": "0.10.0-beta.9",
     "unified": "^11.0.4",
     "vfile": "^6.0.1"
