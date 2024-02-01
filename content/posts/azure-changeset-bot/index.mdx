@@ -61,7 +61,7 @@ We got to thinking that this would be a pretty good use case for [Azure Function
 
 To brainstorm, we decided to map out the ideal steps to our pipeline.
 
-![https://res.cloudinary.com/emmacampbell/image/upload/v1673888992/Pull_Request_Created_wnggpo.png](https://res.cloudinary.com/emmacampbell/image/upload/v1673888992/Pull_Request_Created_wnggpo.png)
+![Pull Request Flowchart](assets/pr_created.png)
 
 Our bot will be responsible for executing the "Contains Changeset" and "Version and add to PR" steps of this flowchart.
 
@@ -114,7 +114,7 @@ and then, open that directory in visual studio code.
 
 Select the Functions extension from the sidebar in VSCode, and then select the lightning bolt icon to create a new function.
 
-![https://res.cloudinary.com/emmacampbell/image/upload/v1673891478/Screenshot_2023-01-16_at_12.49.23_PM_zmfx0q.png](https://res.cloudinary.com/emmacampbell/image/upload/v1673891478/Screenshot_2023-01-16_at_12.49.23_PM_zmfx0q.png)
+![Azure Workspace Tab](assets/workspace.png)
 
 It will ask you where you want to create the new function (default is the open directory in VSCode) and then what language you'd like to use. For this tutorial, we are using typescript.
 
@@ -209,7 +209,7 @@ this command will run `tsc` in watch mode, so it will rebuild automatically when
 
 Then, open the command pallete in VSCode and execute the "Tasks: Run Task" command.
 
-![Run Tasks VSCode](https://res.cloudinary.com/emmacampbell/image/upload/v1673892554/Screenshot_2023-01-16_at_1.08.54_PM_qfr26a.png)
+![Run Tasks VSCode](assets/vscode_command_prompt.png)
 
 It will then ask you which task to run, so select **func: host start**. A terminal window will open showing the output of that command. You're ready to start writing code now!
 

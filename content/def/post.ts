@@ -9,7 +9,7 @@ import GithubSlugger from "github-slugger";
 const computedFields = defineComputedFields<"Post">({
   slug: {
     type: "string",
-    resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
+    resolve: (doc) => doc._raw.flattenedPath.replace(/posts\//, ""),
   },
   headings: {
     type: "json",
@@ -39,7 +39,7 @@ const computedFields = defineComputedFields<"Post">({
 
 export const Post = defineDocumentType(() => ({
   name: "Post",
-  filePathPattern: "posts/*.mdx",
+  filePathPattern: "posts/**/*.mdx",
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },

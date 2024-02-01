@@ -1,9 +1,10 @@
 import { makeSource } from "contentlayer/source-files";
-import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode, { Options } from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 import { Post } from "./content/def/post";
+import staticImages from "./lib/images";
 
 const codeOptions: Options = {
   keepBackground: false,
@@ -32,6 +33,8 @@ export default makeSource({
       ],
       // @ts-expect-error
       [rehypePrettyCode, codeOptions],
+      // @ts-expect-error
+      [staticImages, { publicDir: 'public'}]
     ],
   },
 });

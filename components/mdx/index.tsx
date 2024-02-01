@@ -1,5 +1,6 @@
 import { Aside } from "./aside";
 import type { MDXComponents } from "mdx/types";
+import MdxImage from "./img";
 
 export const components: MDXComponents = {
   Aside,
@@ -26,5 +27,6 @@ export const components: MDXComponents = {
   },
   strong: ({children}) => {
     return <strong className="font-bold">{children}</strong>
-  }
+  },
+  img: MdxImage
 };
