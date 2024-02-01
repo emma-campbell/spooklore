@@ -33,7 +33,6 @@ async function getBooks() {
         "Content-Type": "application/json",
         authorization: process.env.LITERAL_TOKEN ?? "",
       },
-      cache: "reload",
       next: {
         revalidate: 3600,
       },
