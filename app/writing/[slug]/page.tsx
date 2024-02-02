@@ -1,4 +1,5 @@
 import { components } from "@/components/mdx";
+import { ViewCounter } from "@/components/view-counter";
 import { getPost } from "@/lib/content";
 import { allPosts } from "contentlayer/generated";
 import moment from "moment";
@@ -24,9 +25,13 @@ export default function Page({ params }: { params: { slug: string } }) {
     <section className="pt-8">
       <div className="pb-4">
         <h1 className="font-serif font-bold text-6xl pb-4">{post.title}</h1>
-        <p className="font-medium text-gray-200">
-          {moment(post.published).format("MMMM Do, YYYY")}
-        </p>
+        <div className="font-medium text-gray-200 flex space-x-2">
+          <p className="font-medium text-gray-200">
+            {moment(post.published).format("MMMM Do, YYYY")}
+          </p>
+          <p>•</p>
+          <ViewCounter slug={slug} track={true} />
+        </div>
       </div>
       <section className="flex flex-col space-y-4">
         <MDXContent components={components} />
