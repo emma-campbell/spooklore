@@ -8,7 +8,7 @@ import staticImages from "./lib/images";
 
 const codeOptions: Options = {
   keepBackground: false,
-  theme: 'vitesse-dark'
+  theme: "vitesse-dark",
 };
 
 export default makeSource({
@@ -26,15 +26,13 @@ export default makeSource({
         rehypeAutolinkHeadings,
         {
           behavior: "wrap",
-          properties: {
-            // className: [HEADING_LINK_ANCHOR],
-          },
+          properties: {},
         },
       ],
       // @ts-expect-error
       [rehypePrettyCode, codeOptions],
       // @ts-expect-error
-      [staticImages, { publicDir: 'public'}]
+      [staticImages, { publicDir: "public" }],
     ],
   },
 });
