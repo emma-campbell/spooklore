@@ -1,12 +1,12 @@
 ---
-title: "Adding Metrics to a Next.js Blog Post using Planetscale and Prisma"
-description: "Adding metrics to a blog post or article is easily accomplished using Planetscale and Prisma, allowing for a great developer experience and better type-safety with content"
-published: "2022-12-09"
-status: "published"
+title: Adding Metrics to a Next.js Blog Post using Planetscale and Prisma
+description: Adding metrics to a blog post or article is easily accomplished using Planetscale and Prisma, allowing for a great developer experience and better type-safety with content
+published: '2022-12-09'
+status: published
 tags:
-  - { value: "Next.js" }
-  - { value: "Planetscale" }
-  - { value: "Prisma" }
+  - {value: Next.js}
+  - {value: Planetscale}
+  - {value: Prisma}
 ---
 
 Adding metrics to a post is both a fun coding challenge as well as a nice to have. We are going to utilize a [PlanetScale](https://planetscale.com) database, which has a generous "Hobby" plan. This plan includes
@@ -306,7 +306,7 @@ With the actual "API" route defined, we can go ahead and write the React Hook to
 Create a new file in the `/lib` directory called `usePostViews.ts`. We have two goals for the hook:
 
 1. Get the number of post views
-2. Update the number of post views
+1. Update the number of post views
 
 First, we want to define the return typing from the API.
 
@@ -366,62 +366,62 @@ And finally, we can use [SWR](https://swr.vercel.app), a tool built by the peopl
 import useSWR, { SWRConfiguration } from "swr";
 
 export type Views = {
-	total: number
+ total: number
 };
 
 const API_URL = '/api/views';
 
 async function getPostViews(slug: string): Promise<Views> {
-	const res = await fetch(`${API_URL}/${slug}`);
-	if (!res.ok) {
-		throw new Error("An error occured while fetching views");
-	}
-	return res.json();
+ const res = await fetch(`${API_URL}/${slug}`);
+ if (!res.ok) {
+  throw new Error("An error occured while fetching views");
+ }
+ return res.json();
 }
 
 async function updatePostViews(slug: string): Promise<Views> {
-	const res = await fetch(
+ const res = await fetch(
     `${API_URL}/${slug}`, 
     { 
       method: "POST" 
     }
   );
-	if (!res.ok) {
-		throw new Error("An error occured while updating views");
-	}
-	return res.json();
+ if (!res.ok) {
+  throw new Error("An error occured while updating views");
+ }
+ return res.json();
 }
 
 export const usePostViews = (
   slug: string, 
   config?: SWRConfiguration
 ) => {
-	const { data, error, mutate } = useSWR<Views>(
-		`${API_URL}/${slug}`,
-		() => getPostViews(slug),
-		{
-			dedupingInterval: 600000,
-			...config
-		}
-	)
+ const { data, error, mutate } = useSWR<Views>(
+  `${API_URL}/${slug}`,
+  () => getPostViews(slug),
+  {
+   dedupingInterval: 600000,
+   ...config
+  }
+ )
 
-	const views = data?.total;
+ const views = data?.total;
 
-	const increment = () => {
-		mutate(
-			updatePostViews(slug).catch(e => {
-				console.log(e);
-				return { total: 0 };
-			});
-		)
-	};
+ const increment = () => {
+  mutate(
+   updatePostViews(slug).catch(e => {
+    console.log(e);
+    return { total: 0 };
+   });
+  )
+ };
 
-	return {
-		views,
-		isLoading: !error && !views,
-		isError: !!error,
-		increment
-	};
+ return {
+  views,
+  isLoading: !error && !views,
+  isError: !!error,
+  increment
+ };
 }
 ```
 
@@ -439,14 +439,14 @@ Well, we represent the concept of a `Session` within our database. We will utili
 // ...
 
 model Stats {
-	slug      String  @id @db.VarChar(128)
-	likes     Int     @default(0)
-	views     Int     @default(0)
+ slug      String  @id @db.VarChar(128)
+ likes     Int     @default(0)
+ views     Int     @default(0)
 }
 
 model Session {
-	id        String   @id
-	createdAt DateTime @default(now())
+ id        String   @id
+ createdAt DateTime @default(now())
 }
 ```
 
@@ -750,8 +750,8 @@ export default async function handler(
       });
 
       res.status(200).json({
-	      total: stats.likes.toString(),
-	      user: false
+       total: stats.likes.toString(),
+       user: false
       });
     }
   } catch (e: any) {
@@ -1002,46 +1002,46 @@ import { LoadingDots } from "./loading";
 import { Metric } from "./metric";
 
 export const PostMetrics = ({ slug }: { slug: string }) => {
-	const interval = 5000;
-	const { shouldPoll, intersectionRef } = usePolling(interval);
+ const interval = 5000;
+ const { shouldPoll, intersectionRef } = usePolling(interval);
 
-	const {
-		views,
-		isLoading: viewsIsLoading.
-		isError: viewsIsError
-	} = usePostViews(slug, {
-		revalidateOnMount: false,
-		refreshInterval: shouldPoll ? interval : 0,
-		dedupingInterval: interval
-	});
+ const {
+  views,
+  isLoading: viewsIsLoading.
+  isError: viewsIsError
+ } = usePostViews(slug, {
+  revalidateOnMount: false,
+  refreshInterval: shouldPoll ? interval : 0,
+  dedupingInterval: interval
+ });
 
-	const {
-		likes,
-		isLoading: likesIsLoading,
-		isError: likesIsError
-	} = usePostLikes(slug, {
-		refreshInterval: shouldPoll ? interval : 0
-	});
+ const {
+  likes,
+  isLoading: likesIsLoading,
+  isError: likesIsError
+ } = usePostLikes(slug, {
+  refreshInterval: shouldPoll ? interval : 0
+ });
 
-	return (
-		<div ref={intersectionRef}>
-			<div>
-				{ viewsIsError || viewsIsLoading ? (
-					<LoadingDots />
-				) : (
-					<Metric key={views} stat={views} />
-				)}
-			</div>
-			<div className="text-white-100/30">&middot;</div>
-			<div>
-				{ likeIsError || likesIsLoading ? (
-					<LoadingDots />
-				): (
-					<Metric key={likes} stat={likes} />
-				)}
-			</div>
-		</div>
-	)
+ return (
+  <div ref={intersectionRef}>
+   <div>
+    { viewsIsError || viewsIsLoading ? (
+     <LoadingDots />
+    ) : (
+     <Metric key={views} stat={views} />
+    )}
+   </div>
+   <div className="text-white-100/30">&middot;</div>
+   <div>
+    { likeIsError || likesIsLoading ? (
+     <LoadingDots />
+    ): (
+     <Metric key={likes} stat={likes} />
+    )}
+   </div>
+  </div>
+ )
 };
 ```
 
@@ -1066,33 +1066,33 @@ import { Metric } from "./metric";
 export default function ViewCounter = (
   { slug } : { slug: string }
 ) => {
-	const interval = 5000;
-	const { shouldPoll, intersectionRef } = usePolling(interval);
+ const interval = 5000;
+ const { shouldPoll, intersectionRef } = usePolling(interval);
 
-	const {
-		views,
-		isLoading,
-		isError,
-		increment
-	} = usePostViews(slug, {
-		revalidateOnMount: false,
-		refreshInterval: shouldPoll ? interval : 0,
-		dedupingInterval: interval
-	});
+ const {
+  views,
+  isLoading,
+  isError,
+  increment
+ } = usePostViews(slug, {
+  revalidateOnMount: false,
+  refreshInterval: shouldPoll ? interval : 0,
+  dedupingInterval: interval
+ });
 
-	useEffect(() => {
-		increment();
-	}, []);
+ useEffect(() => {
+  increment();
+ }, []);
 
-	return (
-		<div ref={intersectionRef}>
-			{ isError || isLoading ? (
-				<LoadingDots />
-			): (
-				<Metric key={views} stat={views} />
-			)}
-		</div>
-	)
+ return (
+  <div ref={intersectionRef}>
+   { isError || isLoading ? (
+    <LoadingDots />
+   ): (
+    <Metric key={views} stat={views} />
+   )}
+  </div>
+ )
 }
 ```
 
@@ -1108,37 +1108,37 @@ import { Metric } from "./metric";
 export default const LikeCounter = (
   { slug } : { slug: string }
 ) => {
-	const interval = 5000;
-	const { shouldPoll, intersectionRef } = usePolling(interval);
+ const interval = 5000;
+ const { shouldPoll, intersectionRef } = usePolling(interval);
 
-	const { user, likes, isError, isLoading, increment, decrement } =
-		usePostLikes(slug, {
-			refreshInterval: shouldPoll ? interval : 0
-		});
+ const { user, likes, isError, isLoading, increment, decrement } =
+  usePostLikes(slug, {
+   refreshInterval: shouldPoll ? interval : 0
+  });
 
-	return (
-		<div className="flex flex-row space-x-2">
-			<div ref={intersectionRef}>
-				{ isError || isLoading ? (
-					<LoadingDots />
-				) : (
-					<Metric stat={likes} />
-				)} likes
-			</div>
-			<button
-				className={`hover:text-white/60 ${user ? "text-blue-300" : ""}`}
-				onClick={() => {
-					if (isLoading) { return };
-					if (user) {
-						decrement();
-					} else {
-						increment();
-					}
-				}}
-			>
-				<HandsThumbsUpIcon className="w-5" />
-			</button>
-		</div>
-	)
+ return (
+  <div className="flex flex-row space-x-2">
+   <div ref={intersectionRef}>
+    { isError || isLoading ? (
+     <LoadingDots />
+    ) : (
+     <Metric stat={likes} />
+    )} likes
+   </div>
+   <button
+    className={`hover:text-white/60 ${user ? "text-blue-300" : ""}`}
+    onClick={() => {
+     if (isLoading) { return };
+     if (user) {
+      decrement();
+     } else {
+      increment();
+     }
+    }}
+   >
+    <HandsThumbsUpIcon className="w-5" />
+   </button>
+  </div>
+ )
 }
 ```

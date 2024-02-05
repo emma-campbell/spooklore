@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Code Block Styling */
 figure[data-rehype-pretty-code-figure] {
   background-color: #292929;
   padding: 1rem;
@@ -33,4 +34,21 @@ code[data-line-numbers-max-digits="2"] > [data-line]::before {
  
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
+}
+
+.footnotes {
+  border-top: 2px #292929;
+}
+
+.footnotes > ol > li {
+  font-size:  0.9rem;
+}
+
+li.list-outside::marker {
+  color: #7F7F7F;
+  content: '[' + ']'
+}
+
+a.data-footnote-backref {
+  color: #7F7F7F;
 }

@@ -17,10 +17,13 @@ export const components: MDXComponents = {
     return <h5 className="font-serif text-xl">{children}</h5>;
   },
   ol: ({ children }) => {
-    return <ol className="list-disc list-inside">{children}</ol>;
+    return <ol className="list-decimal list-inside">{children}</ol>;
+  },
+  ul: ({children}) => {
+    return <ul className="list-disc list-inside"></ul>
   },
   li: ({ children }) => {
-    return <li className="list-decimal list-inside space-y-1">{children}</li>;
+    return <li className="list-outside">{children}</li>;
   },
   blockquote: ({ children }) => {
     return <blockquote className="border-l-4 pl-2 bg-white/5 rounded-md">{children}</blockquote>

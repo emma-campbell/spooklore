@@ -1,0 +1,125 @@
+---
+title: Hosting a RSS Feed on your Next.Js Blog
+status: published
+published: 2024-02-06
+tags:
+  - { value: rss }
+---
+
+If you read my article about my reasons for moving my site[^1], you know that one of the habits I am trying to create for 2024 is to create more and consume less. One of the actions I’ve taken is subscribing to RSS feeds that I care about, instead of mindlessly scrolling news feeds on twitter, Apple News, etc.
+
+I haven’t missed that habit, and it really has limited the amount of stupid things that I find myself sucked into reading. 
+
+When I try to build habits that revolve around _not doing certain things_, the best way to deter those actions is to build friction around it. Using an RSS reader has been some of the friction I’ve introduced.
+
+However, this got me thinking about how I don’t have an RSS feed built into this site. During the first iteration of my web existence, it was one of the features I set out to build, but didn’t quite get around to.
+
+So, without further ado, here is how I went about integrating an RSS feed into my site.
+
+# Pre-Requisites
+
+These aren’t so much pre-requisites as they are just statements about the system that I am building this feature into. There are two system-specific pieces of information that provide important context.
+
+1. This site uses Next.Js. Most of this logic can be extracted and generalized into any static site generator.
+2. My articles are made developer friendly using contentlayer[^2]. Again, just a personal choice, but any list of your articles/post and their relevant metadata will suffice (whether that comes from a CMS or repository).
+
+# General Framework
+
+Just so everyone is on the same page, all an RSS feed is, is a `xml` file that is hosted on your site. It contains all relevant information and metadata about your posts for feed readers to parse out. So conceptually, there are two steps to building this out.
+
+1. We need to generate the xml file.
+2. We need to host the file on our site.
+
+# Implementation
+
+To generate the feed, I am going to use the help of the node package feed[^3]. You can take a look at the options to configure with its Github repo.
+
+Now when it comes to serving the file, the Next.Js server route handlers[^4] are a near perfect use case for this.
+
+If you’re using the `/app` directory, create a new folder called `rss.xml`, and within it, a file called `route.ts`.
+
+Within this file, we are going to handle any `GET` https request to the `rss.xml` path on your site. Let’s first define the function that generates the feed.
+
+```ts
+import { Feed } from 'feed';
+
+const createFeed = () => {
+	const feed = new Feed({
+		title: "Emma's Thoughts | spooklore.com",
+		description: "An RSS feed of all posts from spooklore.com",
+		id: "spooklore.com",
+		link: "spooklore.com",
+		language: "en",
+		image:
+      "https://www.spooklore.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fspooklore.e786bb34.png&w=2048&q=75",
+    favicon: "",
+    copyright: `2022 - ${moment().format("YYYY")}, Emma Campbell`,
+    author: {
+      name: "Emma Campbell",
+      email: "hello@spooklore.com",
+      link: "https://spooklore.com",
+    },
+	});
+}
+```
+
+Above, we have created a feed object. All that’s left is to add all of the posts. Because we are set up using contentlayer, we can import the `allPosts` object, filter and sort however we’d like, and then add each to the feed.
+
+```ts
+// previous imports
+import { Post, allPosts } from "contentlayer/generated";
+import moment from "moment";
+import { compareDesc } from "date-fns";
+
+const createFeed = () => {
+	// ...created feed object
+	
+	allPosts
+		.filter((p: Post) => p.status !== "draft")
+		.sort((a: Post, b: Post) => 
+			compareDesc(new Date(a.published), new Date(b.published))
+		)
+		.forEach((p: Post) => {
+			const url = `https://spooklore.com/writing/${p.slug}`;
+			feed.addItem({
+				id: url,
+				link: url,
+				title: p.title,
+				description: p.description,
+				date: moment(p.published).toDate(),
+				author: [
+					{
+						name: "Emma Campbell",
+						email: "hello@spooklore.com",
+						link: "https://spooklore.com"
+					}
+				]
+			})
+		})
+		
+	return feed.rss2();
+}
+```
+
+Finally, handle the get route
+
+```ts
+// previous code
+
+export const GET = () => {
+	const feed = createFeed();
+	return new Response(feed, {
+		status: 200,
+		headers: {
+			"Content-Type": "application/xml"
+		}
+	});
+}
+```
+
+Now, you can link to `/rss.xml` anywhere on your site and have the end user redirected to the feed url to give to their RSS reader.
+
+[^1]: https://www.spooklore.com/writing/moving
+[^2]: https://contentlayer.dev/
+[^3]: https://github.com/jpmonette/feed
+[^4]: https://nextjs.org/docs/app/building-your-application/routing/route-handlers

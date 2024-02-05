@@ -1,8 +1,7 @@
+import { Post, allPosts } from "contentlayer/generated";
+import { compareDesc } from "date-fns";
 import { Feed } from "feed";
 import moment from "moment";
-import { compareDesc } from "date-fns";
-import { writeFileSync } from "fs";
-import { Post, Tag, allPosts } from "contentlayer/generated";
 
 const createFeed = () => {
   const feed = new Feed({

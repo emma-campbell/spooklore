@@ -1,7 +1,7 @@
 ---
 title: Book Tracking with Literal.Club
 published: 01-15-2024
-status: "published"
+status: published
 ---
 
 Everyone and their mothers always makes a goal to read more books at the start of every given year. Last year, I read more than I hoped, but on the previous version of my site had a tracker that was pretty tedious to use.
@@ -85,19 +85,19 @@ import { LiteralContext } from "@/context/literal";
 // ....
 
 export default function Root({ 
-	children
+ children
 }: { children; React.ReactNode }) {
-	
-	// ...
-	return (
-		<html>
-			<body>
-				<LiteralContext>
-					{ /* any content here */ }
-				</LiteralContext>
-			</body>
-		</html>
-	)
+ 
+ // ...
+ return (
+  <html>
+   <body>
+    <LiteralContext>
+     { /* any content here */ }
+    </LiteralContext>
+   </body>
+  </html>
+ )
 }
 ```
 
@@ -111,13 +111,13 @@ Host: literal.club
 User-Agent: HTTPie
 
 {
-	"query":"mutation login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      token\n      profile {\n        id\n        handle\n        name\n        bio\n        image\n      }\n    }\n  }",
-	"variables":{
-	  "email": "<your username>",
-	  "password": "<your password>"
-	}
+ "query":"mutation login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      token\n      profile {\n        id\n        handle\n        name\n        bio\n        image\n      }\n    }\n  }",
+ "variables":{
+   "email": "<your username>",
+   "password": "<your password>"
+ }
 }
-``` 
+```
 
 Grab the token and the profileId from the response and put those in your ENV file. To use client side in Next.JS, they need to be prefixed with `NEXT_PUBLIC_`.
 
@@ -168,49 +168,49 @@ const query = gql`
 `;
 
 export default function ReadingPreview {
-	const [ book, setBook ] = useState({} as Book);
-	const { data, error} = useSuspenseQuery(query);
-	
-	// filter when getting data to find book with status
-	// 'IS_READING'
-	useEffect(() => {
-		const current = (data as any)?
+ const [ book, setBook ] = useState({} as Book);
+ const { data, error} = useSuspenseQuery(query);
+ 
+ // filter when getting data to find book with status
+ // 'IS_READING'
+ useEffect(() => {
+  const current = (data as any)?
         .myReadingStates?
         .filter((s) => s.status === 'IS_READING')?
         .[0];
-		setBook(current.book as Book);
-	}, [data])
-	
-	return (
-		<Suspense>
-	      <div className="grid grid-cols-3 gap-4">
-	        <Image
-	          className="w-32 rounded-md col-span-1"
-	          src={book.cover}
-	          alt={`${book.title} cover`}
-	          width="230"
-	          height="500"
-	        />
-	        <div className="col-span-2">
-	          <div className="pb-2">
-	            <h4 
+  setBook(current.book as Book);
+ }, [data])
+ 
+ return (
+  <Suspense>
+       <div className="grid grid-cols-3 gap-4">
+         <Image
+           className="w-32 rounded-md col-span-1"
+           src={book.cover}
+           alt={`${book.title} cover`}
+           width="230"
+           height="500"
+         />
+         <div className="col-span-2">
+           <div className="pb-2">
+             <h4 
                 className="font-serif font-semibold text-[#ffffff]">
-	              {book.title}
-	            </h4>
-	            <p>
+               {book.title}
+             </h4>
+             <p>
                 {
                   book.authors?.map((a) => a.name).join(", ")
                 }
               </p>
-	          </div>
-	          <p>{book.description?.slice(0, 120).concat("...")}</p>
-	          <div 
+           </div>
+           <p>{book.description?.slice(0, 120).concat("...")}</p>
+           <div 
               className="flex justify-end text-[#7F7F7F] hover:underline hover:decoration-wavy hover:text-[#ffffff]">
-	            <Link href={"/books"}>read more</Link>
-	          </div>
-	        </div>
-	      </div>
-	    </Suspense>
+             <Link href={"/books"}>read more</Link>
+           </div>
+         </div>
+       </div>
+     </Suspense>
     )
 }
 ```

@@ -1,10 +1,9 @@
 import { RawDocumentData } from "contentlayer/source-files";
 import fs from "fs/promises";
-import { Element, Root } from "hast";
+import { Element } from "hast";
 import crypto from "node:crypto";
 import path from "node:path";
 import sharp from "sharp";
-import { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import createPlaceholder from "./data-blur";
@@ -58,7 +57,7 @@ const metadata = async (source: string, pathname: string) => {
     return null;
   }
 
-  const src = '/' + pathname;
+  const src = "/" + pathname;
 
   const sha256 = checksum(content);
 
@@ -103,17 +102,16 @@ type Options = {
   publicDir: string;
 };
 
-const staticImages: Plugin<[Options], Root> =
-  (options) => (tree, file, done) => {
-    const tasks: Promise<void>[] = [];
+const staticImages = (options: Options) => (tree: any, file: VFile, done: () => any) => {
+  const tasks: Promise<void>[] = [];
 
-    visit(tree, "element", (node) => {
-      if (node.tagName === "img") {
-        tasks.push(processImage(options, file, node));
-      }
-    });
+  visit(tree, "element", (node) => {
+    if (node.tagName === "img") {
+      tasks.push(processImage(options, file, node));
+    }
+  });
 
-    Promise.all(tasks).then(() => done());
-  };
+  Promise.all(tasks).then(() => done());
+};
 
 export default staticImages;
