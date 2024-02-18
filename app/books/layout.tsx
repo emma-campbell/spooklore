@@ -7,7 +7,7 @@ import { LiteralWrapper } from "@/context/literal";
 import type { Metadata } from "next";
 import { Fraunces, JetBrains_Mono, Nunito_Sans } from "next/font/google";
 
-import "./globals.css";
+import "../globals.css";
 
 const nunito = Nunito_Sans({
   subsets: ["latin", "latin-ext"],
@@ -27,11 +27,6 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Emma Campbell",
   description: "Emma's Digital Presence",
-  authors: {
-    url: "https://spooklore.com",
-    name: "Emma Campbell"
-  },
-  referrer: "origin"
 };
 
 export default function RootLayout({
@@ -57,7 +52,7 @@ export default function RootLayout({
           <Nav />
         </div>
         <LiteralWrapper>
-          <main className="max-w-lg px-2 md:px-0 text-[#D7D7D7] mx-auto">
+          <main className="max-w-2xl px-2 md:px-0 text-[#D7D7D7] mx-auto">
             {children}
           </main>
         </LiteralWrapper>

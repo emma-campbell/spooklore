@@ -10,26 +10,17 @@ const links = {
   "/writing": {
     text: "thoughts",
   },
-  "/about": {
-    text: "about",
-  },
   "/books": {
-    text: "reading"
-  }
+    text: "reading",
+  },
 };
 
 export const Nav = () => {
   const pathname = usePathname() || "/";
   return (
-    <nav className="flex flex-row justify-between items-center w-full px-2 sm:px-0">
+    <nav className="flex flex-row justify-between items-center w-full max-w-2xl px-4 sm:px-0">
       <Link href="/" className="flex flex-row items-center space-x-4">
-        <Image
-          src={Icon}
-          className="max-w-20 rounded-full"
-          loading="eager"
-          alt="spooklore image with anxious skeleton"
-        />
-        <h1 className="hidden sm:visible text-white text-5xl font-serif">spooklore.</h1>
+        <h1 className="text-white text-3xl font-serif">spooklore.</h1>
       </Link>
       <div className="flex flex-row font-sans space-x-8">
         {Object.entries(links).map(([path, { text }]) => {

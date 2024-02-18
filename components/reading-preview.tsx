@@ -38,7 +38,7 @@ export default function ReadingPreview() {
 
   return (
     <Suspense>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-2">
         <Image
           className="w-32 rounded-md col-span-1"
           src={book.cover}
@@ -53,10 +53,7 @@ export default function ReadingPreview() {
             </h4>
             <p>{book.authors?.map((a) => a.name).join(", ")}</p>
           </div>
-          <p>{book.description?.slice(0, 120).concat("...")}</p>
-          <div className="flex justify-end text-[#7F7F7F] hover:underline hover:decoration-wavy hover:text-[#ffffff]">
-            <Link href={"/books"}>read more</Link>
-          </div>
+          <p>{book.description?.slice(0, 215).concat(". . .")}</p>
         </div>
       </div>
     </Suspense>

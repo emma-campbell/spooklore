@@ -1,7 +1,12 @@
 import moment from "moment";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import type { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Books',
+  description: 'A frequently updated list of all books I\'ve read or am currently reading.'
+}
 const CurrentlyReading = dynamic(
   () => import("@/components/books/currently-reading")
 );

@@ -4,6 +4,7 @@ import { getPost } from "@/lib/content";
 import { allPosts } from "contentlayer/generated";
 import moment from "moment";
 import { useMDXComponent } from "next-contentlayer/hooks";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   let posts = allPosts;
@@ -13,6 +14,26 @@ export async function generateStaticParams() {
   return posts.map((p) => {
     slug: p.slug;
   });
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { slug } = params;
+
+  const post = getPost(slug);
+  return {
+    title: post.title,
+    description: post.description,
+    keywords: post.tags ? post.tags.map((t) => t.value) : undefined,
+    authors: {
+      name: "Emma Campbell",
+      url: "https://spooklore.com",
+    },
+    referrer: "origin",
+  };
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
