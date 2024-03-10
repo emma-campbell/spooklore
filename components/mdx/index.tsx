@@ -17,19 +17,23 @@ export const components: MDXComponents = {
     return <h5 className="font-serif text-xl">{children}</h5>;
   },
   ol: ({ children }) => {
-    return <ol className="list-decimal list-inside">{children}</ol>;
+    return <ol className="list-inside list-decimal">{children}</ol>;
   },
-  ul: ({children}) => {
-    return <ul className="list-disc list-inside"></ul>
+  ul: ({ children }) => {
+    return <ul className="list-inside list-disc">{children}</ul>;
   },
   li: ({ children }) => {
     return <li className="list-outside">{children}</li>;
   },
   blockquote: ({ children }) => {
-    return <blockquote className="border-l-4 pl-2 bg-white/5 rounded-md">{children}</blockquote>
+    return (
+      <blockquote className="rounded-md border-l-4 bg-white/5 pl-2">
+        {children}
+      </blockquote>
+    );
   },
-  strong: ({children}) => {
-    return <strong className="font-bold">{children}</strong>
+  strong: ({ children }) => {
+    return <strong className="font-bold">{children}</strong>;
   },
-  img: MdxImage
+  img: MdxImage,
 };

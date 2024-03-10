@@ -28,7 +28,7 @@ export default function ReadDate({ id }: { id: string }) {
 
   return (
     <>
-      <p className="text-sm">{moment(date).format("MMMM Do, YYYY")}</p>
+      <p className="text-xs">{moment(date).format("MMMM Do, YYYY")}</p>
     </>
   );
 }
