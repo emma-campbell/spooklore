@@ -4,13 +4,16 @@ import Link from "next/link";
 
 export function PostListItem({ post }: { post: Post }) {
   return (
-    <div className="grid grid-cols-4 gap-4">
-      <Link className="col-span-3 hover:underline" href={`/writing/${post.slug}`}>
-        <p className="font-bold text-md">{post.title}</p>
-      </Link>
-      <p className="col-span-1 text-sm text-[#777777] flex justify-end">
-        {moment(post.published).format("MMMM Do")}
+    <div className="flex space-x-4">
+      <p className="text-md flex font-mono font-bold text-[#777777]">
+        {moment(post.published).format("DD")}
       </p>
+      <Link
+        className="flex flex-wrap hover:underline"
+        href={`/writing/${post.slug}`}
+      >
+        <p className="text-md font-bold">{post.title}</p>
+      </Link>
     </div>
   );
 }

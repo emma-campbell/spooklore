@@ -18,11 +18,11 @@ const links = {
 export const Nav = () => {
   const pathname = usePathname() || "/";
   return (
-    <nav className="flex flex-row justify-between items-center w-full max-w-2xl px-4 sm:px-0">
+    <nav className="flex w-full max-w-2xl flex-row items-center justify-between px-4 sm:px-0">
       <Link href="/" className="flex flex-row items-center space-x-4">
-        <h1 className="text-white text-3xl font-serif">spooklore.</h1>
+        <h1 className="font-logo text-3xl text-white">spooklore.</h1>
       </Link>
-      <div className="flex flex-row font-sans space-x-8">
+      <div className="flex flex-row space-x-8 font-sans">
         {Object.entries(links).map(([path, { text }]) => {
           const active = path == pathname;
           return (
@@ -30,10 +30,10 @@ export const Nav = () => {
               key={text}
               href={path}
               className={clsx(
-                "transition-all hover:text-[#ffffff] hover:underline hover:decoration-wavy align-middle leading-extra-tight sm:leading-tight",
+                "leading-extra-tight align-middle transition-all hover:text-[#ffffff] hover:underline hover:decoration-wavy sm:leading-tight",
                 {
                   "text-[#7F7F7F]": !active,
-                }
+                },
               )}
             >
               {text}

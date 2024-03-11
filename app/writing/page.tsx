@@ -3,14 +3,22 @@ import { Post, allPosts } from "contentlayer/generated";
 import moment from "moment";
 
 function postsByYear() {
-  const map: Map<number, Post[]> = new Map();
+  const map: Map<number, Map<number, Post[]>> = new Map();
   allPosts.forEach((p) => {
-    const year = moment(p.published).year();
-    const posts = map.get(year);
-    if (!posts) {
-      map.set(year, [p]);
+    const publishedYear = moment(p.published).year();
+    const publishedMonth = moment(p.published).month() + 1;
+
+    const year = map.get(publishedYear);
+    if (!year) {
+      const month = new Map<number, Post[]>().set(publishedMonth, [p]);
+      map.set(publishedYear, month);
     } else {
-      posts.push(p);
+      const month = year.get(publishedMonth);
+      if (!month) {
+        year.set(publishedMonth, [p]);
+      } else {
+        month.push(p);
+      }
     }
   });
   return map;
@@ -18,8 +26,8 @@ function postsByYear() {
 
 export default function Thoughts() {
   const posts = Array.from(postsByYear().entries()).sort((a, b) => {
-    const [firstYear, firstYearPosts] = a;
-    const [secondYear, secondYearPosts] = b;
+    const [firstYear, firstYearMonths] = a;
+    const [secondYear, secondYearMonths] = b;
     return secondYear - firstYear;
   });
 
@@ -29,8 +37,24 @@ export default function Thoughts() {
         <p>This is where I write my thoughts. Take a look around!</p>
         <section className="flex flex-col space-y-8">
           {posts.map((entry) => {
-            const [year, posts] = entry;
-            return <PostList key={year} year={year} posts={posts} />;
+            const [year, months] = entry;
+            const dom = [];
+
+            let idx = 1;
+            const target = Array.from(months.keys()).length;
+            for (const [month, posts] of months) {
+              dom.push(
+                <PostList
+                  key={month}
+                  month={month}
+                  posts={posts}
+                  year={idx == target ? year : undefined}
+                />,
+              );
+              idx++;
+            }
+
+            return <>{dom.reverse()}</>;
           })}
         </section>
       </section>

@@ -31,23 +31,21 @@ export function PostPreview({ post }: { post: Post }) {
           <h4 className="">{post.title}</h4>
         </Link>
         <div className="col-span-2 flex justify-end">
-          <p className="">
-            {moment(post.published).format("MMM DD, YYYY")}
-          </p>
+          <p className="">{moment(post.published).format("MMM DD, YYYY")}</p>
         </div>
       </div>
     );
   } else {
     return (
-      <div className="grid grid-cols-6 sm:flex sm:flex-row justify-between space-x-2 transition-all">
+      <div className="grid grid-cols-6 justify-between space-x-2 transition-all sm:flex sm:flex-row">
         <Link
           href={`/writing/${post.slug}`}
-          className="flex-shrink-0 max-w-1/2 col-span-4 hover:text-white"
+          className="max-w-1/2 col-span-4 flex-shrink-0 hover:text-white"
         >
-          <h4 className="">{post.title}</h4>
+          <h4 className="font-serif font-extralight">{post.title}</h4>
         </Link>
-        <span className="relative border-b-[1px] border-[#D7D7D7] w-full -top-2"></span>
-        <p className="flex-shrink-0 col-span-2">
+        <span className="relative -top-2 w-full border-b-[1px] border-[#D7D7D7]"></span>
+        <p className="col-span-2 flex-shrink-0">
           {moment(post.published).format("MMM DD, YYYY")}
         </p>
       </div>

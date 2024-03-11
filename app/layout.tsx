@@ -5,18 +5,35 @@ import { Footer } from "@/components/layout/footer";
 import { Nav } from "@/components/layout/nav";
 import { LiteralWrapper } from "@/context/literal";
 import type { Metadata } from "next";
-import { Fraunces, JetBrains_Mono, Nunito_Sans } from "next/font/google";
 
+import {
+  Barrio,
+  Barriecito,
+  Archivo,
+  JetBrains_Mono,
+  Alegreya_Sans,
+} from "next/font/google";
 import "./globals.css";
 
-const nunito = Nunito_Sans({
+const barrio = Barrio({
+  style: ["normal"],
   subsets: ["latin", "latin-ext"],
-  variable: "--font-nunito-sans",
+  weight: ["400"],
+  variable: "--font-barrio",
 });
 
-const fraunces = Fraunces({
+const barriecito = Barriecito({
+  style: ["normal"],
   subsets: ["latin", "latin-ext"],
-  variable: "--font-fraunces",
+  weight: ["400"],
+  variable: "--font-barriecito",
+});
+
+const alegreya = Alegreya_Sans({
+  style: ["italic", "normal"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["100", "300", "500", "700", "800", "900"],
+  variable: "--font-alegreya",
 });
 
 const jetbrains = JetBrains_Mono({
@@ -29,9 +46,9 @@ export const metadata: Metadata = {
   description: "Emma's Digital Presence",
   authors: {
     url: "https://spooklore.com",
-    name: "Emma Campbell"
+    name: "Emma Campbell",
   },
-  referrer: "origin"
+  referrer: "origin",
 };
 
 export default function RootLayout({
@@ -42,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} ${fraunces.variable} ${jetbrains.variable} w-full items-center text-text`}
+      className={`${barrio.variable} ${barriecito.variable} ${alegreya.variable} ${jetbrains.variable} text-text w-full items-center`}
     >
       <head>
         <link
@@ -52,12 +69,12 @@ export default function RootLayout({
           href="/rss.xml"
         />
       </head>
-      <body className="max-w-4xl pt-12 bg-black mx-auto">
+      <body className="mx-auto max-w-4xl bg-black pt-12">
         <div className="flex justify-center pb-6">
           <Nav />
         </div>
         <LiteralWrapper>
-          <main className="max-w-lg px-2 md:px-0 text-[#D7D7D7] mx-auto">
+          <main className="mx-auto max-w-lg px-2 text-[#D7D7D7] md:px-0">
             {children}
           </main>
         </LiteralWrapper>
