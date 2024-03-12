@@ -40,7 +40,7 @@ export default function Uses() {
         <p>Find my list of RSS feed subscriptions below.</p>
         <ul className="list-disc [&_a]:underline">
           {links.map((l) => (
-            <li>
+            <li key={l.text}>
               <Link href={l.href}>{l.text}</Link>
             </li>
           ))}
