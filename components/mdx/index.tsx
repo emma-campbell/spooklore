@@ -23,7 +23,7 @@ export const components: MDXComponents = {
     return <ul className="list-inside list-disc">{children}</ul>;
   },
   li: ({ children }) => {
-    return <li className="list-outside">{children}</li>;
+    return <li className="">{children}</li>;
   },
   blockquote: ({ children }) => {
     return (

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Colophon() {
   return (
     <>
-      <section className="flex flex-col space-y-4 pt-8 [&_a]:underline [&_a]:hover:">
+      <section className="[&_a]:hover: flex flex-col space-y-4 pt-8 [&_a]:underline">
         <p>
           This website was originally published January 14th, 2024 near
           Washington, D.C. It&apos;s developed on a 2021 M1 Macbook Pro and
@@ -14,12 +14,12 @@ export default function Colophon() {
         </p>
         <p>
           The fonts used are{" "}
-          <Link href="https://fonts.google.com/specimen/Fraunces?query=fraunces">
-            Fraunces
+          <Link href="https://fonts.google.com/specimen/Barrio?query=Barrio">
+            Barrio
           </Link>{" "}
           and{" "}
-          <Link href="https://fonts.google.com/specimen/Inter?query=inter">
-            Inter
+          <Link href="https://fonts.google.com/specimen/Alegreya+Sans?query=Alegreya">
+            Alegreya Sans
           </Link>
           .
         </p>
@@ -34,7 +34,7 @@ export default function Colophon() {
           API&apos;s. You can read more on that{" "}
           <Link href="https://spooklore.com/writing/book-tracker">here</Link>.
         </p>
-        <p className="text-xs">last updated: January 24th, 2024</p>
+        <p className="text-xs">last updated: 03/11/2024</p>
       </section>
     </>
   );

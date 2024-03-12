@@ -1,6 +1,9 @@
+import { PageTitle } from "@/components/layout/page-title";
+
 export default function Uses() {
   return (
     <>
+      <PageTitle value="Uses" />
       <section id="uses" className="space-y-12 pt-8">
         <p>
           This is a list of all software, hardware, tools, apps, etc, that I use
@@ -10,7 +13,7 @@ export default function Uses() {
 
         <section id="hardware" className="space-y-4">
           <h2 className="font-serif text-4xl">Hardware</h2>
-          <ol className="list-disc list-inside">
+          <ol className="list-inside list-disc">
             <li>2021 Apple Macbook Pro M1 Max, 64 GB</li>
             <li>Apple Magic Trackpad</li>
             <li>Massdrop Alt Wired Keyboard</li>
@@ -28,7 +31,7 @@ export default function Uses() {
             don&apos;t think there will ever be something perfect unless I build
             it myself. Here is what I find myself coming back to.
           </p>
-          <ol className="list-disc list-inside">
+          <ol className="list-inside list-disc">
             <li>
               <b>Text Editor</b> : Visual Studio Code/Neovim
             </li>

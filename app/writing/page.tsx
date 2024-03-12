@@ -1,3 +1,4 @@
+import { PageTitle } from "@/components/layout/page-title";
 import PostList from "@/components/posts/list";
 import { Post, allPosts } from "contentlayer/generated";
 import moment from "moment";
@@ -33,8 +34,13 @@ export default function Thoughts() {
 
   return (
     <>
+      <PageTitle value="Writing" />
       <section className="flex flex-col space-y-12 pt-8">
-        <p>This is where I write my thoughts. Take a look around!</p>
+        <p>
+          A collection of thoughts and notes compiled by me, on a not-so-regular
+          basis. Topics include but are not limited to development, career
+          anxiety, mental health, a loads more.
+        </p>
         <section className="flex flex-col space-y-8">
           {posts.map((entry) => {
             const [year, months] = entry;

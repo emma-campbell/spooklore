@@ -9,7 +9,6 @@ import type { Metadata } from "next";
 import {
   Barrio,
   Barriecito,
-  Archivo,
   JetBrains_Mono,
   Alegreya_Sans,
 } from "next/font/google";
