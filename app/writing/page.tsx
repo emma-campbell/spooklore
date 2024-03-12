@@ -25,12 +25,20 @@ function postsByYear() {
   return map;
 }
 
-export default function Thoughts() {
-  const posts = Array.from(postsByYear().entries()).sort((a, b) => {
-    const [firstYear, firstYearMonths] = a;
-    const [secondYear, secondYearMonths] = b;
-    return secondYear - firstYear;
+function sort(map: Map<number, any>, asc?: boolean) {
+  return Array.from(map.entries()).sort((a, b) => {
+    const [keyA, valuesA] = a;
+    const [keyB, valuesB] = b;
+    if (asc) {
+      return keyA - keyB;
+    } else {
+      return keyB - keyA;
+    }
   });
+}
+
+export default function Thoughts() {
+  const posts = sort(postsByYear(), false);
 
   return (
     <>
@@ -46,9 +54,11 @@ export default function Thoughts() {
             const [year, months] = entry;
             const dom = [];
 
+            const monthsSorted = sort(months, true);
+
             let idx = 1;
-            const target = Array.from(months.keys()).length;
-            for (const [month, posts] of months) {
+            const target = Array.from(monthsSorted.keys()).length;
+            for (const [month, posts] of monthsSorted) {
               dom.push(
                 <PostList
                   key={month}
