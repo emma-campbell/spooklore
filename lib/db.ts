@@ -1,8 +1,5 @@
-import { Kysely } from "kysely";
-import {
-  PlanetScaleDialect,
-  PlanetScaleDialectConfig,
-} from "kysely-planetscale";
+import { Kysely, MysqlDialect } from "kysely";
+import { createPool } from "mysql2";
 
 export interface Stats {
   slug: string;
@@ -20,10 +17,14 @@ interface Database {
   session: Session;
 }
 
-const config: PlanetScaleDialectConfig = {
-  url: process.env.DATABASE_URL,
-};
+const DATABASE_URL = process.env.DATABASE_URL;
 
-export const db = new Kysely<Database>({
-  dialect: new PlanetScaleDialect(config),
+if (!DATABASE_URL) {
+  throw Error("No Database Connection");
+}
+
+const dialect = new MysqlDialect({
+  pool: createPool(DATABASE_URL),
 });
+
+export const db = new Kysely<Database>({ dialect });
