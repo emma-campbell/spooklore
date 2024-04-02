@@ -9,7 +9,7 @@ const ReadingPreview = dynamic(() => import("@/components/reading-preview"));
 function getPosts() {
   return allPosts
     .sort((a, b) => {
-      return moment(b.published).unix() - moment(a.published).unix();
+      return moment.utc(b.published).unix() - moment.utc(a.published).unix();
     })
     .slice(0, 3);
 }

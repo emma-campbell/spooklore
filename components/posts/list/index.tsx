@@ -31,7 +31,7 @@ export default function PostList({
         <div className="flex flex-col space-y-1">
           {posts
             .sort(
-              (a, b) => moment(b.published).unix() - moment(a.published).unix(),
+              (a, b) => moment.utc(b.published).unix() - moment.utc(a.published).unix(),
             )
             .map((post) => (
               <PostListItem key={post.title} post={post} />

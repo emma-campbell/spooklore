@@ -31,7 +31,7 @@ export function PostPreview({ post }: { post: Post }) {
           <h4 className="">{post.title}</h4>
         </Link>
         <div className="col-span-2 flex justify-end">
-          <p className="">{moment(post.published).format("MMM DD, YYYY")}</p>
+          <p className="">{moment.utc(post.published).format("MMM DD, YYYY")}</p>
         </div>
       </div>
     );
@@ -46,7 +46,7 @@ export function PostPreview({ post }: { post: Post }) {
         </Link>
         <span className="relative -top-2 w-full border-b-[1px] border-[#D7D7D7]"></span>
         <p className="col-span-2 flex-shrink-0">
-          {moment(post.published).format("MMM DD, YYYY")}
+          {moment.utc(post.published).format("MMM DD, YYYY")}
         </p>
       </div>
     );
