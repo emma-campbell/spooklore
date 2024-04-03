@@ -1,4 +1,10 @@
-# 1.0.0
+## 1.0.1
+
+### Patch Changes
+
+- Fixed broken links for post previews on homepage
+
+## 1.0.0
 
 ## Major Changes
 

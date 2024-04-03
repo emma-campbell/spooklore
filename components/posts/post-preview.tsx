@@ -25,7 +25,7 @@ export function PostPreview({ post }: { post: Post }) {
     return (
       <div className="grid grid-cols-6">
         <Link
-          href={`/writing/${post.slug}`}
+          href={`/notebook/${post.slug}`}
           className="col-span-4 hover:text-white"
         >
           <h4 className="">{post.title}</h4>
