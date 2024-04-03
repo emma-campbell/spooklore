@@ -15,7 +15,7 @@ export const Hero = () => {
         <Scribble className={""}/>
       </div>
       <Image
-        className={"w-72 relative left-[22em] -top-[3.5em]"}
+        className={"hidden sm:block w-72 relative left-[22em] -top-[3.5em]"}
         src={HeaderImage}
         alt={"Skeleton doing a kickflip on a skateboard"}/>
     </section>)
