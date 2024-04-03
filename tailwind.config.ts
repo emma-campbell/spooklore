@@ -13,20 +13,17 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        sans: ["var(--font-alegreya)"],
-        serif: ["var(--font-barrio)"],
-        logo: ["var(--font-barriecito)"],
+        sans: ["var(--font-secondary)"],
+        serif: ["var(--font-primary)"],
         mono: ["var(--font-jetbrains-mono)"],
       },
     },
     colors: {
-      black: "#222222",
-      gray: {
-        200: "#7F7F7F",
-        300: "#222222",
-      },
-      text: "#D7D7D7",
-      white: "#ffffff",
+      primary: "#00715C",
+      secondary: "#F2F1EB",
+      heading: "#222222",
+      body: "#434343",
+      highlighted: "#706E62"
     },
   },
   plugins: [],

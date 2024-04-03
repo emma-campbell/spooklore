@@ -12,28 +12,36 @@ import {
   JetBrains_Mono,
   Alegreya_Sans,
 } from "next/font/google";
+import localFont from "next/font/local";
+
 import "./globals.css";
 
-const barrio = Barrio({
-  style: ["normal"],
-  subsets: ["latin", "latin-ext"],
-  weight: ["400"],
-  variable: "--font-barrio",
+const volume_tc = localFont({
+  src: [
+    {
+      path: 'styles/fonts/Volume TC Regular.otf',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: 'styles/fonts/Volume TC Italic.otf',
+      weight: '400',
+      style: 'italic'
+    }
+  ],
+  variable: '--font-primary'
 });
 
-const barriecito = Barriecito({
-  style: ["normal"],
-  subsets: ["latin", "latin-ext"],
-  weight: ["400"],
-  variable: "--font-barriecito",
-});
-
-const alegreya = Alegreya_Sans({
-  style: ["italic", "normal"],
-  subsets: ["latin", "latin-ext"],
-  weight: ["100", "300", "500", "700", "800", "900"],
-  variable: "--font-alegreya",
-});
+const volume_tc_sans = localFont({
+  src: [
+    {
+      path: 'styles/fonts/Volume TC Sans.otf',
+      weight: '400',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-secondary'
+})
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin", "latin-ext"],
@@ -58,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${barrio.variable} ${barriecito.variable} ${alegreya.variable} ${jetbrains.variable} text-text w-full items-center`}
+      className={`${volume_tc.variable} ${volume_tc_sans.variable} ${jetbrains.variable} w-full items-center`}
     >
       <head>
         <link
@@ -68,12 +76,12 @@ export default function RootLayout({
           href="/rss.xml"
         />
       </head>
-      <body className="mx-auto max-w-4xl bg-black pt-12">
+      <body className="mx-auto max-w-xl font-serif bg-secondary pt-12">
         <div className="flex justify-center pb-6">
           <Nav />
         </div>
         <LiteralWrapper>
-          <main className="mx-auto max-w-lg px-2 text-[#D7D7D7] md:px-0">
+          <main className="mx-auto px-2 md:px-0">
             {children}
           </main>
         </LiteralWrapper>

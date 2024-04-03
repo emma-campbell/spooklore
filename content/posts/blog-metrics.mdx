@@ -3,6 +3,7 @@ title: Adding Metrics to a Next.js Blog Post using Planetscale and Prisma
 description: Adding metrics to a blog post or article is easily accomplished using Planetscale and Prisma, allowing for a great developer experience and better type-safety with content
 published: '2022-12-09'
 status: published
+entry: how-to
 tags:
   - {value: Next.js}
   - {value: Planetscale}
@@ -48,7 +49,7 @@ The above command creates the `/prisma` directory, with a file called `schema.pr
 
 Add the `.env` file to `.gitignore`. You don't want to commit this file to any source control, since it often contains sensitive information.
 
-```sh showLineNumbers title=".gitignore" {4}
+```sh showLineNumbers {4}
 #
 #
 # ...
@@ -119,11 +120,9 @@ You may get an error in your IDE saying that it can't find the client. Not to wo
 
 Now that we got the setup out of the way, we can move on to adding the feature -- which is the post metrics! I use the term "backend" loosely here, basically just referring to defining our schema in Prisma and defining the Next.js API routes and React hooks to access the data.
 
-<Aside>
-  ✨ _Note: this next part assumes you followed the [last part of this
-  series](https://www.emmacampbell.dev/blog/blog-content-layer) that set up
-  content using contentlayer_
-</Aside>
+> ✨ **Note**: this next part assumes you followed the [last part of this
+series](https://www.emmacampbell.dev/blog/blog-content-layer) that set up
+content using contentlayer
 
 ## Views
 
@@ -310,7 +309,7 @@ Create a new file in the `/lib` directory called `usePostViews.ts`. We have two 
 
 First, we want to define the return typing from the API.
 
-```typescript showLineNumbers title="/lib/usePostViews.ts" {1-3}
+```typescript showLineNumbers {1-3}
 export type Views = {
   total: number;
 };

@@ -3,7 +3,8 @@ import Link from "next/link";
 export default function Colophon() {
   return (
     <>
-      <section className="[&_a]:hover: flex flex-col space-y-4 pt-8 [&_a]:underline">
+      <h1 className={"text-4xl pb-2"}>Colophon</h1>
+      <section className="flex flex-col space-y-4 [&_a]:underline text-body">
         <p>
           This website was originally published January 14th, 2024 near
           Washington, D.C. It&apos;s developed on a 2021 M1 Macbook Pro and
@@ -14,12 +15,12 @@ export default function Colophon() {
         </p>
         <p>
           The fonts used are{" "}
-          <Link href="https://fonts.google.com/specimen/Barrio?query=Barrio">
-            Barrio
+          <Link href="https://creativemarket.com/TomChalky/7554894-Volume-%E2%80%93-Handcrafted-Font-Trio">
+            Volume TC
           </Link>{" "}
           and{" "}
-          <Link href="https://fonts.google.com/specimen/Alegreya+Sans?query=Alegreya">
-            Alegreya Sans
+          <Link href="https://creativemarket.com/TomChalky/7554894-Volume-%E2%80%93-Handcrafted-Font-Trio">
+            Volume TC Sans
           </Link>
           .
         </p>
@@ -30,11 +31,11 @@ export default function Colophon() {
         <p>
           All content is hosted in Github, and uses{" "}
           <Link href="https://contentlayer.dev/">Contentlayer</Link> to parse
-          and display. My book tracker was built using Literal.Club&apos;s
+          and display posts. My book tracker was built using Literal.Club&apos;s
           API&apos;s. You can read more on that{" "}
-          <Link href="https://spooklore.com/writing/book-tracker">here</Link>.
+          <Link href="/notebook/book-tracker">here</Link>.
         </p>
-        <p className="text-xs">last updated: 03/11/2024</p>
+        <p className="text-xs font-sans">last updated: 03/11/2024</p>
       </section>
     </>
   );

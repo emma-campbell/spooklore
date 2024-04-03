@@ -28,7 +28,7 @@ export function ViewCounter({
   }, [slug, track]);
 
   return (
-    <div className="flex space-x-1 font-medium text-gray-200">
+    <div className="flex space-x-1">
       <Suspense>
         <Metric key={"views"} stat={views} />
       </Suspense>

@@ -5,16 +5,16 @@ import MdxImage from "./img";
 export const components: MDXComponents = {
   Aside,
   h1: ({ children, className }) => {
-    return <h2 className="font-serif text-4xl">{children}</h2>;
+    return <h2 className="font-serif text-black text-3xl">{children}</h2>;
   },
   h2: ({ children }) => {
-    return <h3 className="font-serif text-3xl">{children}</h3>;
+    return <h3 className="font-serif text-black text-2xl">{children}</h3>;
   },
   h3: ({ children }) => {
-    return <h4 className="font-serif text-2xl">{children}</h4>;
+    return <h4 className="font-serif text-black text-xl">{children}</h4>;
   },
   h4: ({ children }) => {
-    return <h5 className="font-serif text-xl">{children}</h5>;
+    return <h5 className="font-serif text-black text-lg">{children}</h5>;
   },
   ol: ({ children }) => {
     return <ol className="list-inside list-decimal">{children}</ol>;
@@ -27,7 +27,7 @@ export const components: MDXComponents = {
   },
   blockquote: ({ children }) => {
     return (
-      <blockquote className="rounded-md border-l-4 bg-white/5 pl-2">
+      <blockquote className="border-l-4 border-primary bg-primary/10 pl-2 py-2 text-body">
         {children}
       </blockquote>
     );

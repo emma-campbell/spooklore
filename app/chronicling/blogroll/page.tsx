@@ -1,5 +1,7 @@
 import { PageTitle } from "@/components/layout/page-title";
 import Link from "next/link";
+import Newspaper from "public/newspaper.png";
+import Image from "next/image";
 
 const links = [
   {
@@ -35,10 +37,11 @@ const links = [
 export default function Uses() {
   return (
     <>
-      <PageTitle value="Blogroll" />
-      <section id="blogroll" className="space-y-12 pt-8">
-        <p>Find my list of RSS feed subscriptions below.</p>
-        <ul className="list-disc [&_a]:underline">
+      <Image src={Newspaper} alt={"Skeleton reading the newspaper"} className={"h-48 w-auto"}/>
+      <h1 className={"text-4xl pb-2"}>Blogroll</h1>
+      <p className={"text-body"}>This is a list off the blogs that read frequently or subscribe to in my RSS reader.</p>
+      <section id="blogroll" className="space-y-12 pt-8 text-body">
+        <ul className="list-disc list-inside [&_a]:underline">
           {links.map((l) => (
             <li key={l.text}>
               <Link href={l.href}>{l.text}</Link>
