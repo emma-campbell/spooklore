@@ -20,7 +20,7 @@ const MdxImage = ({ src, alt, width, height, blurDataURL }: Props) => {
       alt={alt}
       width={Number(width)}
       height={Number(height)}
-      className="rounded-md shadow-md"
+      className="rounded-sm shadow-sm max-h-96 w-auto"
     />
   );
 };

@@ -52,7 +52,7 @@ export const Post = defineDocumentType(() => ({
     },
     entry: {
       type: "enum",
-      options: ["note", "essay", "how-to"],
+      options: ["note", "essay", "how-to", "experiment"],
       required: true,
     },
     tags: {

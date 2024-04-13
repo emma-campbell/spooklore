@@ -39,7 +39,7 @@ export function PostPreview({ post }: { post: Post }) {
     return (
       <div className="grid grid-cols-6 justify-between space-x-2 transition-all text-lg font-serif text-highlighted sm:flex sm:flex-row">
         <Link
-          href={`/writing/${post.slug}`}
+          href={`/notebook/${post.slug}`}
           className="max-w-1/2 col-span-4 flex-shrink-0 text-body hover:text-highlighted"
         >
           <h4>{post.title}</h4>

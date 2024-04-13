@@ -68,7 +68,7 @@ export default function NotebookEntry({params}: {params:{slug: string}}) {
           {
             post.tags ? <div className={"flex justify-between text-lg"}>
               <p>Tags</p>
-              <p>{post.tags.map(t => t.value).join(", ")}</p>
+              <p>{post.tags.map(t => t.value.toLowerCase()).join(", ")}</p>
             </div> : null
           }
         </div>
