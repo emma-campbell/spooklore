@@ -1,5 +1,3 @@
-## 1.0.1
-
 ## 1.1.0
 
 ### Minor Changes
@@ -10,6 +8,8 @@
 
 - b38bee6: Fixed footnotes display
 - 2459b48: Added extra spacing between headers in changelog page
+
+## 1.0.1
 
 ### Patch Changes
 
