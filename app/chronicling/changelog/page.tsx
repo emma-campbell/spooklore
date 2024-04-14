@@ -17,7 +17,7 @@ export default async function Changelog() {
       <Image src={FlowerBunch} alt={"Group of flowers and grasses"} className={"h-48 w-auto"}/>
       <h1 className={"text-4xl pb-2"}>Changelog</h1>
       <p className={"text-body"}>A <i>changelog</i> is a document that collects records of changes made to a piece of software. Here are all the ways this site has changed over time.</p>
-      <section className={"text-body pt-3"}>
+      <section className={"text-body pt-3 space-y-2"}>
         <MDXRemote source={changelog} components={components}/>
       </section>
     </>
