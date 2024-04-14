@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import MyNotebook from "public/notebook.png"
-import {allPosts, Post} from "contentlayer/generated";
+import {Post} from "contentlayer/generated";
 import moment from "moment/moment";
 import PostList from "@/components/posts/list";
+import {Posts} from "@/lib/posts";
 
 function postsByYear() {
   const map: Map<number, Map<number, Post[]>> = new Map();
-  allPosts
-    .filter(p => p.status !== "draft")
+  Posts()
     .forEach((p) => {
       const publishedYear = moment.utc(p.published).year();
       const publishedMonth = moment.utc(p.published).month() + 1;
