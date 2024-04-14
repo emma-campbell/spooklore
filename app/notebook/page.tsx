@@ -7,22 +7,24 @@ import PostList from "@/components/posts/list";
 
 function postsByYear() {
   const map: Map<number, Map<number, Post[]>> = new Map();
-  allPosts.forEach((p) => {
-    const publishedYear = moment.utc(p.published).year();
-    const publishedMonth = moment.utc(p.published).month() + 1;
+  allPosts
+    .filter(p => p.status !== "draft")
+    .forEach((p) => {
+      const publishedYear = moment.utc(p.published).year();
+      const publishedMonth = moment.utc(p.published).month() + 1;
 
-    const year = map.get(publishedYear);
-    if (!year) {
-      const month = new Map<number, Post[]>().set(publishedMonth, [p]);
-      map.set(publishedYear, month);
-    } else {
-      const month = year.get(publishedMonth);
-      if (!month) {
-        year.set(publishedMonth, [p]);
+      const year = map.get(publishedYear);
+      if (!year) {
+        const month = new Map<number, Post[]>().set(publishedMonth, [p]);
+        map.set(publishedYear, month);
       } else {
-        month.push(p);
+        const month = year.get(publishedMonth);
+        if (!month) {
+          year.set(publishedMonth, [p]);
+        } else {
+          month.push(p);
+        }
       }
-    }
   });
   return map;
 }

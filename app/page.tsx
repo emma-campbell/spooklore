@@ -10,6 +10,7 @@ const ReadingPreview = dynamic(() => import("@/components/reading-preview"));
 
 function getPosts() {
   return allPosts
+    .filter(p => p.status !== "draft")
     .sort((a, b) => {
       return moment.utc(b.published).unix() - moment.utc(a.published).unix();
     })
@@ -62,7 +63,7 @@ export default function Home() {
             <PostPreview key={p.slug} post={p} />
           ))}
         </ul>
-        <p className={"text-body pt-2"}>I&apos;ve written <u>{allPosts.length} posts</u> since starting this blog in 2022.</p>
+        <p className={"text-body pt-2"}>I&apos;ve written <u>{allPosts.filter(p => p.status != "draft").length} posts</u> since starting this blog in 2022.</p>
       </section>
       <section id="currently-reading" className="">
         <Link href="/chronicling/books" className={"flex items-center w-full justify-around"}>

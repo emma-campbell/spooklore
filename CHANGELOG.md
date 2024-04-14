@@ -1,3 +1,9 @@
+## 1.1.1
+
+### Patch Changes
+
+- 70d92b8: Fix site displaying draft posts
+
 ## 1.1.0
 
 ### Minor Changes
