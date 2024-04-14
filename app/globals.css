@@ -70,22 +70,40 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
 }
 
 .footnotes {
-    border-top: 2px #292929;
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+        visibility: hidden;
+    }
+
+    ol {
+        display: flex;
+        flex-direction: column;
+        counter-reset: section;
+        list-style-type: none;
+
+        li::before {
+            counter-increment: section;
+            content: "[ " counter(section) " ]";
+            flex-shrink: 0;
+            padding-right: 6px;
+        }
+
+        li {
+            display: flex;
+            p {
+                color: #434343;
+                :hover {
+                    color: #706E62;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
 
-.footnotes > ol > li {
-    font-size: 0.9rem;
-}
-
-li.list-outside::marker {
-    color: #7f7f7f;
-    content: "[" + "]";
-}
 
 a.data-footnote-backref {
     color: #7f7f7f;
 }
-
-/* .footnotes li {
-    display: block;
-} */
