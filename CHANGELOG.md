@@ -1,5 +1,16 @@
 ## 1.0.1
 
+## 1.1.0
+
+### Minor Changes
+
+- 3fce2ee: Link the version number in the bottom of the footer to the changelog page
+
+### Patch Changes
+
+- b38bee6: Fixed footnotes display
+- 2459b48: Added extra spacing between headers in changelog page
+
 ### Patch Changes
 
 - Fixed broken links for post previews on homepage
