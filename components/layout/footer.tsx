@@ -1,7 +1,7 @@
 import FooterImage from "public/footer.png";
 import Image from "next/image";
 import moment from "moment";
-import { version } from "package.json";
+import { default as packageJson } from "package.json";
 import Link from "next/link";
 
 export const Footer = () => {
@@ -11,7 +11,7 @@ export const Footer = () => {
         <Image src={FooterImage} alt={"bunch of flowers"} className={"h-48 w-auto"}/>
         <div className="col-span-2 text-sm flex flex-col text-center">
           <p>© 2022 - {moment().format("YYYY")} Emma Campbell</p>
-          <Link href={"/chronicling/changelog"} className={"hover:text-highlighted hover:underline"}>v{version}</Link>
+          <Link href={"/chronicling/changelog"} className={"hover:text-highlighted hover:underline"}>v{packageJson.version}</Link>
         </div>
       </div>
     </footer>
