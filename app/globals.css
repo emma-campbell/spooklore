@@ -85,13 +85,16 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
 
         li::before {
             counter-increment: section;
-            content: "[ " counter(section) " ]";
+            content: "[" counter(section) "]";
+            font-size: 0.8em;
+            vertical-align: text-bottom;
             flex-shrink: 0;
             padding-right: 6px;
         }
 
         li {
             display: flex;
+            font-size: 0.9em;
             p {
                 color: #434343;
                 :hover {

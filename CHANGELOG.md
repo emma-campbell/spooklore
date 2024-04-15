@@ -1,3 +1,9 @@
+## 1.2.0
+
+### Minor Changes
+
+- 69cf1cb: Moved `posts.filter` to a reusable method
+
 ## 1.1.1
 
 ### Patch Changes
