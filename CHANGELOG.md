@@ -1,3 +1,9 @@
+## 1.3.0
+
+### Minor Changes
+
+- 4c2c97c: Minor stylings (change font sizing, mobile queries)
+
 ## 1.2.0
 
 ### Minor Changes

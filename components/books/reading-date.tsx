@@ -1,7 +1,7 @@
 "use client";
 
 import { gql, useSuspenseQuery } from "@apollo/client";
-import moment from "moment";
+import { formatDistance} from "date-fns";
 import { useEffect, useState } from "react";
 
 const query = gql`
@@ -28,7 +28,7 @@ export default function ReadDate({ id }: { id: string }) {
 
   return (
     <>
-      <p className="font-serif font-body text-lg text-highlighted">{moment(date).format("MMM Do, YYYY")}</p>
+      <p className="font-serif font-body text-highlighted">{date ? formatDistance(Date.parse(date ?? ""), new Date()) : null} ago</p>
     </>
   );
 }

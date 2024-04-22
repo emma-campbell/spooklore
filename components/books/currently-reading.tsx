@@ -55,7 +55,7 @@ export default function CurrentlyReading() {
           {book.title} | {book.authors?.map((a) => a.name).join(", ")}
         </p>
         <Suspense>
-          <ReadDate id={book.id ?? ""} />
+          <ReadDate  id={book.id ?? ""} />
         </Suspense>
       </div>
     </Suspense>

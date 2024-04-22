@@ -1,11 +1,10 @@
-import { allPosts } from "@/.contentlayer/generated";
 import { PostPreview } from "@/components/posts/post-preview";
 import { Hero } from "@/components/layout/hero";
-import moment from "moment";
 import dynamic from "next/dynamic";
 
 import Link from "next/link";
-import {Posts} from "@/lib/posts";
+import { Posts } from "@/lib/posts";
+import moment from "moment";
 
 const ReadingPreview = dynamic(() => import("@/components/reading-preview"));
 
@@ -58,7 +57,7 @@ export default function Home() {
             latest posts
           </h1>
         </Link>
-        <ul className="font-serif col-span-3">
+        <ul className="font-serif col-span-3 text-md space-y-1 md:space-y-0">
           {posts.map((p) => (
             <PostPreview key={p.slug} post={p} />
           ))}
@@ -86,10 +85,10 @@ export default function Home() {
             links.map(({ title, description, href}) => {
               return (
                 <li key={title}>
-                  <Link href={href} className={"text-lg text-body underline hover:text-highlighted"}>
+                  <Link href={href} className={"text-md text-body underline hover:text-highlighted"}>
                     {title}
                   </Link>
-                  <p className={"text-body"}>{description}</p>
+                  <p className={"text-body text-md"}>{description}</p>
                 </li>
               )
             })
