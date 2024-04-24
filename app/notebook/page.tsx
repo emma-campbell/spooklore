@@ -1,30 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
-import MyNotebook from "public/notebook.png"
-import {Post} from "contentlayer/generated";
+import MyNotebook from "public/notebook.png";
+import { Post } from "contentlayer/generated";
 import moment from "moment/moment";
 import PostList from "@/components/posts/list";
-import {Posts} from "@/lib/posts";
+import { Posts } from "@/lib/posts";
 
 function postsByYear() {
   const map: Map<number, Map<number, Post[]>> = new Map();
-  Posts()
-    .forEach((p) => {
-      const publishedYear = moment.utc(p.published).year();
-      const publishedMonth = moment.utc(p.published).month() + 1;
+  Posts().forEach((p) => {
+    const publishedYear = moment.utc(p.published).year();
+    const publishedMonth = moment.utc(p.published).month() + 1;
 
-      const year = map.get(publishedYear);
-      if (!year) {
-        const month = new Map<number, Post[]>().set(publishedMonth, [p]);
-        map.set(publishedYear, month);
+    const year = map.get(publishedYear);
+    if (!year) {
+      const month = new Map<number, Post[]>().set(publishedMonth, [p]);
+      map.set(publishedYear, month);
+    } else {
+      const month = year.get(publishedMonth);
+      if (!month) {
+        year.set(publishedMonth, [p]);
       } else {
-        const month = year.get(publishedMonth);
-        if (!month) {
-          year.set(publishedMonth, [p]);
-        } else {
-          month.push(p);
-        }
+        month.push(p);
       }
+    }
   });
   return map;
 }
@@ -46,11 +45,27 @@ export default function Notebook() {
 
   return (
     <>
-      <section className={"flex flex-col w-full items-center text-center space-around pb-8"}>
-        <Image src={MyNotebook} alt={"notebook"} className={"w-48"}/>
+      <section
+        className={
+          "flex flex-col w-full items-center text-center space-around pb-8"
+        }
+      >
+        <Image
+          src={MyNotebook}
+          alt={"notebook"}
+          className={"w-48"}
+          priority={true}
+        />
         <h1 className={"text-4xl"}>notebook</h1>
         <h2 className={"text-body"}>thoughts, notes, and...other things.</h2>
-        <Link href={"/rss.xml"} className={"font-sans text-primary hover:underline hover:decoration-wavy"}>follow feed</Link>
+        <Link
+          href={"/rss.xml"}
+          className={
+            "font-sans text-primary hover:underline hover:decoration-wavy"
+          }
+        >
+          follow feed
+        </Link>
       </section>
       <section className={"flex flex-col space-y-8"}>
         {posts.map((entry) => {
@@ -68,7 +83,7 @@ export default function Notebook() {
                 month={month}
                 posts={posts}
                 year={idx == target ? year : undefined}
-              />,
+              />
             );
             idx++;
           }
@@ -77,5 +92,5 @@ export default function Notebook() {
         })}
       </section>
     </>
-  )
+  );
 }

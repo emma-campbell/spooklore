@@ -1,3 +1,9 @@
+## 1.3.1
+
+### Patch Changes
+
+- 72058e1: Add priority to images on static pages so they may load quicker
+
 ## 1.3.0
 
 ### Minor Changes
