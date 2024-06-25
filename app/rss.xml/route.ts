@@ -27,7 +27,7 @@ const createFeed = () => {
       compareDesc(new Date(a.published), new Date(b.published))
     )
     .forEach((p: Post) => {
-      const url = `https://spooklore.com/writing/${p.slug}`;
+      const url = `https://spooklore.com/notebook/${p.slug}`;
       feed.addItem({
         id: url,
         link: url,
