@@ -13,7 +13,7 @@ export default function About() {
         className={"h-48 w-auto rounded-sm"}
         placeholder="blur"
       />
-      <section className="flex flex-col text-body pt-4 space-y-2">
+      <section className="flex flex-col text-body pt-4 space-y-6">
         <p>
           Hey 👋 It&apos;s Emma (<i>she/any</i>). You made it to the page
           that&apos;s about me. I feel weird writing this. Seems sorta conceited

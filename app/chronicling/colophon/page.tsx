@@ -1,9 +1,11 @@
+import { LastUpdated } from "@/components/layout/last-updated";
 import Link from "next/link";
 
 export default function Colophon() {
+  const updated = new Date("2024-07-09 19:50 EST");
   return (
     <>
-      <h1 className={"text-4xl pb-2"}>Colophon</h1>
+      <h1 className={"text-4xl pb-4"}>Colophon</h1>
       <section className="flex flex-col space-y-4 [&_a]:underline text-body">
         <p>
           This website was originally published January 14th, 2024 near
@@ -35,7 +37,8 @@ export default function Colophon() {
           API&apos;s. You can read more on that{" "}
           <Link href="/notebook/book-tracker">here</Link>.
         </p>
-        <p className="text-xs font-sans">last updated: 03/11/2024</p>
+        <LastUpdated date={updated} />
+        {/* <p className="text-xs font-sans">last updated: 03/11/2024</p> */}
       </section>
     </>
   );

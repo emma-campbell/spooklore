@@ -4,8 +4,12 @@ import Image from "next/image";
 export default function Uses() {
   return (
     <>
-      <Image src={Computer} alt={"Skeleton hands typing at a computer"} className={"h-48 w-auto"}/>
-      <h1 className={"text-black text-4xl tracking-tight pb-3"}>Uses</h1>
+      <Image
+        src={Computer}
+        alt={"Skeleton hands typing at a computer"}
+        className={"h-48 w-auto"}
+      />
+      <h1 className={"text-black text-4xl tracking-tight pb-3"}>Things</h1>
       <p className={"text-body"}>
         This is a list of all software, hardware, tools, apps, etc, that I use
         on a daily basis. This is a combination of tools that I use as a
@@ -13,7 +17,7 @@ export default function Uses() {
       </p>
       <section id="uses" className="space-y-8 pt-8">
         <section id="hardware" className="space-y-4">
-          <h2 className="font-serif text-4xl text-black">Hardware</h2>
+          <h2 className="font-serif text-2xl text-black">Hardware</h2>
           <ol className="list-inside list-disc text-body">
             <li>2021 Apple Macbook Pro M1 Max, 64 GB</li>
             <li>Apple Magic Trackpad</li>
@@ -25,12 +29,13 @@ export default function Uses() {
         </section>
 
         <section id="software" className="space-y-4">
-          <h2 className="font-serif text-4xl text-black">Software</h2>
+          <h2 className="font-serif text-2xl text-black">Software</h2>
           <p className={"text-body"}>
             If you&apos;re anything like me, I tend to jump from tool to tool
-            trying to find something that&apos;s &ldquo;perfect&rdquo;. Unfortunately, I
-            don&apos;t think there will ever be something perfect unless I build
-            it myself. Here is what I find myself coming back to.
+            trying to find something that&apos;s &ldquo;perfect&rdquo;.
+            Unfortunately, I don&apos;t think there will ever be something
+            perfect unless I build it myself. Here is what I find myself coming
+            back to.
           </p>
           <ol className="list-inside list-disc text-body">
             <li>
@@ -76,7 +81,7 @@ export default function Uses() {
         </section>
 
         <section id="analog" className="space-y-4">
-          <h2 className="font-serif text-4xl text-black">Analog</h2>
+          <h2 className="font-serif text-2xl text-black">Analog</h2>
           <p className={"text-body"}>
             When I am out and about, I tend to carry around a Traveler&apos;s
             journal for jotting down quick notes and ideas.

@@ -28,10 +28,10 @@ const links = [
     href: "/chronicling/blogroll",
   },
   {
-    title: "Uses",
+    title: "Things",
     description:
       "A list of all the software and hardware that I use on a day to day basis",
-    href: "/uses",
+    href: "/things",
   },
 ];
 

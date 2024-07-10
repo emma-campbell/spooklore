@@ -20,12 +20,13 @@ const config: Config = {
     },
     colors: {
       primary: "#00715C",
-      secondary: "#F2F1EB",
+      secondary: "#FBFBFB",
       heading: "#222222",
       body: "#434343",
-      highlighted: "#706E62"
+      highlighted: "#706E62",
     },
   },
   plugins: [],
 };
+
 export default config;

@@ -13,7 +13,7 @@ export function PostListItem({ post }: { post: Post }) {
         className="flex flex-wrap hover:underline text-body hover:text-highlighted"
         href={`/notebook/${post.slug}`}
       >
-        <p className="text-md md:text-lg font-bold">{post.title}</p>
+        <p className="text-md">{post.title}</p>
       </Link>
     </div>
   );

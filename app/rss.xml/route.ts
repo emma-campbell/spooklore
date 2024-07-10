@@ -7,8 +7,8 @@ const createFeed = () => {
   const feed = new Feed({
     title: "Emma's Thoughts",
     description: "An RSS feed of all posts from spooklore.com",
-    id: "https://spooklore.com",
-    link: "https://spooklore.com",
+    id: "https://spooky.blog",
+    link: "https://spooky.blog",
     language: "en",
     image:
       "https://www.spooklore.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fspooklore.e786bb34.png&w=2048&q=75",
@@ -16,18 +16,17 @@ const createFeed = () => {
     copyright: `2022 - ${moment().format("YYYY")}, Emma Campbell`,
     author: {
       name: "Emma Campbell",
-      email: "hello@spooklore.com",
-      link: "https://spooklore.com",
+      link: "https://spooky.blog",
     },
   });
 
   allPosts
     .filter((p: Post) => p.status !== "draft")
     .sort((a: Post, b: Post) =>
-      compareDesc(new Date(a.published), new Date(b.published))
+      compareDesc(new Date(a.published), new Date(b.published)),
     )
     .forEach((p: Post) => {
-      const url = `https://spooklore.com/notebook/${p.slug}`;
+      const url = `https://spooky.blog/notebook/${p.slug}`;
       feed.addItem({
         id: url,
         link: url,
@@ -37,8 +36,7 @@ const createFeed = () => {
         author: [
           {
             name: "Emma Campbell",
-            email: "hello@spooklore.com",
-            link: "https://spooklore.com",
+            link: "https://spooky.blog",
           },
         ],
       });

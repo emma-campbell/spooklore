@@ -1,3 +1,9 @@
+## 1.4.0
+
+### Minor Changes
+
+- c1ab1c5: Some coloring changes, new font!
+
 ## 1.3.1
 
 ### Patch Changes

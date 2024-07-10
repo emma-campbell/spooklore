@@ -1,23 +1,29 @@
-import {allPosts} from "contentlayer/generated";
-import {getPost} from "@/lib/content";
-import {useMDXComponent} from "next-contentlayer/hooks";
+import { allPosts } from "contentlayer/generated";
+import { getPost } from "@/lib/content";
+import { useMDXComponent } from "next-contentlayer/hooks";
 import moment from "moment";
-import {ViewCounter} from "@/components/view-counter";
-import {PostType} from "@/components/posts/post-type";
-import {components} from "@/components/mdx";
+import { ViewCounter } from "@/components/view-counter";
+import { PostType } from "@/components/posts/post-type";
+import { components } from "@/components/mdx";
+import { formatDistanceToNow, format } from "date-fns";
+
 export async function generateStaticParams() {
   let posts = allPosts;
 
   if (process.env.NODE_ENV !== "development") {
-    posts = posts.filter(p => p.status != "draft");
+    posts = posts.filter((p) => p.status != "draft");
   }
 
-  return posts.map(p => {
-    slug: p.slug
-  })
+  return posts.map((p) => {
+    slug: p.slug;
+  });
 }
 
-export async function generateMetadata({ params } : { params: { slug: string }}) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
   const post = getPost(slug);
 
@@ -27,24 +33,27 @@ export async function generateMetadata({ params } : { params: { slug: string }})
     keywords: post.tags ? post.tags.map((t: any) => t.value) : undefined,
     authors: {
       name: "Emma Campbell",
-      url: "https://spooklore.com"
+      url: "https://spooky.blog",
     },
-    referrer: "origin"
-  }
+    referrer: "origin",
+  };
 }
 
-export default function NotebookEntry({params}: {params:{slug: string}}) {
+export default function NotebookEntry({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
   const post = getPost(slug);
-  const published = moment.utc(post.published)
+  const published = moment.utc(post.published);
   const MDXContent = useMDXComponent(post.body.code);
+
   return (
     <>
       <section className={"pb-8"}>
         <div className={"flex uppercase space-x-2 font-sans text-highlighted"}>
-          <p>
-            { published.format("DD MMMM YYYY")}
-          </p>
+          <p>{published.format("DD MMMM YYYY")}</p>
           <p>•</p>
           <ViewCounter track={true} slug={slug} />
           <PostType type={post.entry} />
@@ -65,14 +74,14 @@ export default function NotebookEntry({params}: {params:{slug: string}}) {
             <p>Type</p>
             <p>{post.entry}</p>
           </div>
-          {
-            post.tags ? <div className={"flex justify-between text-lg"}>
+          {post.tags ? (
+            <div className={"flex justify-between text-lg"}>
               <p>Tags</p>
-              <p>{post.tags.map(t => t.value.toLowerCase()).join(", ")}</p>
-            </div> : null
-          }
+              <p>{post.tags.map((t) => t.value.toLowerCase()).join(", ")}</p>
+            </div>
+          ) : null}
         </div>
       </section>
     </>
-  )
+  );
 }
