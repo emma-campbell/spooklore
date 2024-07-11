@@ -51,8 +51,8 @@ export default function Home() {
       <Hero />
       <section id={"about-me"} className={"text-body space-y-3"}>
         <p>
-          Welcome to my shit show. I’m Emma, and this is where the word vomit
-          from my brain ends up online (quite the image, right?). I’m a software
+          Welcome to my sh*t show. I’m Emma, and this is where the word vomit
+          from my brain ends up online. Quite the image, right? I’m a software
           engineer by day, and by night a 25 year old in an 80 year olds body
           and probably in bed by 10pm. I wish I was kidding.
         </p>
