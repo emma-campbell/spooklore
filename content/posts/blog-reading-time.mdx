@@ -4,9 +4,7 @@ description: Have you seen the feature on Medium that estimates how much time an
 published: '2022-12-17'
 status: published
 entry: how-to
-tags:
-  - {value: Next.js}
-  - {value: coding}
+tags: ["Next.js", "coding"]
 ---
 
 If you've ever viewed an article on Medium, you'll notice that the preview gives an estimated "read time". This feature is easily to implement using the `reading-time` node package and our existing contentlayer configuration. Begin by installing `reading-time`.
@@ -65,9 +63,9 @@ export const Post = defineDocumentType(() => ({
       of: ReadingTime,
       resolve: (doc) => {
         const time = readingTime(doc.body.raw);
-        return { 
-          minutes: Math.floor(time.minutes), 
-          words: time.words 
+        return {
+          minutes: Math.floor(time.minutes),
+          words: time.words
         };
       },
     },

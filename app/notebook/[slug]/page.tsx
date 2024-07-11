@@ -1,17 +1,17 @@
-import { allPosts } from "contentlayer/generated";
+// import { allPosts } from "contentlayer/generated";
+import { posts } from "@velite";
 import { getPost } from "@/lib/content";
-import { useMDXComponent } from "next-contentlayer/hooks";
 import moment from "moment";
 import { ViewCounter } from "@/components/view-counter";
 import { PostType } from "@/components/posts/post-type";
-import { components } from "@/components/mdx";
+import { MDXContent } from "@/components/mdx";
 import { formatDistanceToNow, format } from "date-fns";
 
 export async function generateStaticParams() {
-  let posts = allPosts;
+  let paths = posts;
 
   if (process.env.NODE_ENV !== "development") {
-    posts = posts.filter((p) => p.status != "draft");
+    paths = posts.filter((p) => p.status != "draft");
   }
 
   return posts.map((p) => {
@@ -47,7 +47,6 @@ export default function NotebookEntry({
   const { slug } = params;
   const post = getPost(slug);
   const published = moment.utc(post.published);
-  const MDXContent = useMDXComponent(post.body.code);
 
   return (
     <>
@@ -61,7 +60,7 @@ export default function NotebookEntry({
         <h1 className={"text-4xl"}>{post.title}</h1>
       </section>
       <section className={"flex flex-col space-y-4 text-body pb-16"}>
-        <MDXContent components={components} />
+        <MDXContent code={post.content} />
       </section>
       <section>
         <h4 className={"font-serif text-3xl text-black pb-2"}>Metadata</h4>
@@ -77,7 +76,7 @@ export default function NotebookEntry({
           {post.tags ? (
             <div className={"flex justify-between text-lg"}>
               <p>Tags</p>
-              <p>{post.tags.map((t) => t.value.toLowerCase()).join(", ")}</p>
+              <p>{post.tags.map((t) => t.toLowerCase()).join(", ")}</p>
             </div>
           ) : null}
         </div>

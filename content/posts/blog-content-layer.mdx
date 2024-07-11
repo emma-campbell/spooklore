@@ -4,10 +4,7 @@ description: Setting up Contentlayer with an existing Next.js app is a breeze! F
 published: '2022-11-22'
 status: published
 entry: how-to
-tags:
-  - {value: contentlayer}
-  - {value: coding}
-  - {value: Next.js}
+tags: ["contentlayer", "coding", "Next.js"]
 ---
 
 Previously, we talked through the choices behind the tech stack used to build my developer blog. The step towards building a functional
@@ -53,9 +50,9 @@ module.exports = withContentlayer(nextConfig);
     }
   },
   "include": [
-    "next-env.d.ts", 
-    "**/*.tsx", 
-    "**/*.ts", 
+    "next-env.d.ts",
+    "**/*.tsx",
+    "**/*.ts",
     ".contentlayer/generated"
   ]
 }
@@ -285,7 +282,7 @@ export const Post = defineDocumentType(() => ({
         // https://stackoverflow.com/a/70802303
         const regex = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
 
-        const headings = 
+        const headings =
           Array.from(doc.body.raw.matchAll(regex)).map(
           // @ts-ignore
           ({ groups }) => {

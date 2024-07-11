@@ -1,6 +1,8 @@
-import { allPosts } from 'contentlayer/generated';
+// import { allPosts } from "contentlayer/generated";
+import { posts } from "@velite";
 
 export const Posts = () => {
-  return allPosts
-    .filter(p => process.env.NODE_ENV !== "development" ? p.status !== "draft" : true)
-}
+  return posts.filter((p) =>
+    process.env.NODE_ENV !== "development" ? p.status !== "draft" : true,
+  );
+};

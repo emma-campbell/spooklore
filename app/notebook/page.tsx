@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import MyNotebook from "public/notebook.png";
-import { Post } from "contentlayer/generated";
+import { Post } from "@velite";
 import moment from "moment/moment";
 import PostList from "@/components/posts/list";
 import { Posts } from "@/lib/posts";
@@ -83,7 +83,7 @@ export default function Notebook() {
                 month={month}
                 posts={posts}
                 year={idx == target ? year : undefined}
-              />
+              />,
             );
             idx++;
           }

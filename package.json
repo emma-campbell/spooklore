@@ -7,7 +7,7 @@
     "build": "yarn generate:content && next build",
     "start": "next start",
     "lint": "next lint",
-    "generate:content": "yarn velite"
+    "generate:content": "yarn velite && rm -rf public/static"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0-rc.2",

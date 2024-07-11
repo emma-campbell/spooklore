@@ -1,7 +1,7 @@
-import { allPosts } from "contentlayer/generated";
+import { posts } from "@velite";
 
 export function getPost(slug: string) {
-  const post = allPosts.find((p) => p.slug === slug);
+  const post = posts.find((p) => p.slug === slug);
   if (!post) {
     throw Error(`Unable to find slug ${slug}`);
   }
