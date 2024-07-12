@@ -1,6 +1,6 @@
 {
   "name": "@spooky/blog",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "private": true,
   "engines": {
     "node": "^20",
@@ -8,10 +8,10 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "yarn generate:content && next build",
+    "build": "yarn generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "generate:content": "yarn velite && rm -rf public/static"
+    "generate": "yarn velite && rm -rf public/static"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0-rc.2",
