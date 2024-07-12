@@ -1,4 +1,5 @@
-import { Post, allPosts } from "contentlayer/generated";
+// import { Post, allPosts } from "contentlayer/generated";
+import { Post, posts } from "@velite";
 import { compareDesc } from "date-fns";
 import { Feed } from "feed";
 import moment from "moment";
@@ -20,7 +21,7 @@ const createFeed = () => {
     },
   });
 
-  allPosts
+  posts
     .filter((p: Post) => p.status !== "draft")
     .sort((a: Post, b: Post) =>
       compareDesc(new Date(a.published), new Date(b.published)),
@@ -28,10 +29,15 @@ const createFeed = () => {
     .forEach((p: Post) => {
       const url = `https://spooky.blog/notebook/${p.slug}`;
       feed.addItem({
-        id: url,
+        id: p.slug,
         link: url,
         title: p.title,
         description: p.description,
+        category: [
+          {
+            name: p.entry.toString(),
+          },
+        ],
         date: moment(p.published).toDate(),
         author: [
           {

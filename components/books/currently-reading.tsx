@@ -6,7 +6,6 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
 import ReadDate from "./reading-date";
-import { ImageSkeleton } from "../loading/image";
 
 const query = gql`
   query myReadingStates {
@@ -55,7 +54,7 @@ export default function CurrentlyReading() {
           {book.title} | {book.authors?.map((a) => a.name).join(", ")}
         </p>
         <Suspense>
-          <ReadDate  id={book.id ?? ""} />
+          <ReadDate id={book.id ?? ""} />
         </Suspense>
       </div>
     </Suspense>

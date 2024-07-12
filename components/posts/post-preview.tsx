@@ -1,5 +1,4 @@
-import { Post } from "contentlayer/generated";
-import moment from "moment";
+import { Post } from "@velite";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
 

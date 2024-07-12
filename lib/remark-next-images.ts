@@ -1,4 +1,3 @@
-import { RawDocumentData } from "contentlayer/source-files";
 import fs from "fs/promises";
 import { Element } from "hast";
 import crypto from "node:crypto";
@@ -7,10 +6,6 @@ import sharp from "sharp";
 import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import createPlaceholder from "./data-blur";
-
-type FileData = {
-  rawDocumentData: RawDocumentData;
-};
 
 const fileChecksum = async (file: string) => {
   try {
@@ -83,9 +78,9 @@ const processImage = async (
     node.properties = {};
   }
 
-  console.debug(
-    `${JSON.stringify(node.properties)} ${JSON.stringify(meta.props)}`,
-  );
+  // console.debug(
+  //   `${JSON.stringify(node.properties)} ${JSON.stringify(meta.props)}`,
+  // );
 
   node.properties = {
     ...node.properties,
