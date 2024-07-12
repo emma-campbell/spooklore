@@ -1,7 +1,7 @@
 import FlowerBunch from "public/flowerbunch.png";
 import Image from "next/image";
 import fs from "fs";
-import { components } from "@/components/mdx";
+import { defaultComponents as components } from "@/components/mdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 export default async function Changelog() {

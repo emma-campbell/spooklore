@@ -1,7 +1,7 @@
 import moment from "moment";
 import { PostListItem } from "./item";
 import { Suspense } from "react";
-import { Post } from "contentlayer/generated";
+import { Post } from "@velite";
 
 export default function PostList({
   month,
@@ -16,9 +16,7 @@ export default function PostList({
   return (
     <div className="flex flex-col space-y-2">
       <div className="flex flex-row justify-between space-x-2 align-text-bottom">
-        <h2 className="font-sans text-lg text-highlighted">
-          {textMonth}
-        </h2>
+        <h2 className="font-sans text-lg text-highlighted">{textMonth}</h2>
         {year ? (
           <>
             <h2 className="justify-end font-sans text-md text-highlighted">
@@ -31,7 +29,8 @@ export default function PostList({
         <div className="flex flex-col space-y-1">
           {posts
             .sort(
-              (a, b) => moment.utc(b.published).unix() - moment.utc(a.published).unix(),
+              (a, b) =>
+                moment.utc(b.published).unix() - moment.utc(a.published).unix(),
             )
             .map((post) => (
               <PostListItem key={post.title} post={post} />

@@ -3,15 +3,12 @@ title: Hosting a RSS Feed on your Next.Js Blog
 status: published
 published: 2024-02-06
 entry: how-to
-tags:
-  - { value: rss }
-  - {value: Next.Js}
-  - {value: coding}
+tags: [rss, Next.Js, coding]
 ---
 
 If you read my article about my reasons for moving my site[^1], you know that one of the habits I am trying to create for 2024 is to create more and consume less. One of the actions I’ve taken is subscribing to RSS feeds that I care about, instead of mindlessly scrolling news feeds on twitter, Apple News, etc.
 
-I haven’t missed that habit, and it really has limited the amount of stupid things that I find myself sucked into reading. 
+I haven’t missed that habit, and it really has limited the amount of stupid things that I find myself sucked into reading.
 
 When I try to build habits that revolve around _not doing certain things_, the best way to deter those actions is to build friction around it. Using an RSS reader has been some of the friction I’ve introduced.
 
@@ -76,10 +73,10 @@ import { compareDesc } from "date-fns";
 
 const createFeed = () => {
 	// ...created feed object
-	
+
 	allPosts
 		.filter((p: Post) => p.status !== "draft")
-		.sort((a: Post, b: Post) => 
+		.sort((a: Post, b: Post) =>
 			compareDesc(new Date(a.published), new Date(b.published))
 		)
 		.forEach((p: Post) => {
@@ -99,7 +96,7 @@ const createFeed = () => {
 				]
 			})
 		})
-		
+
 	return feed.rss2();
 }
 ```

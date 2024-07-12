@@ -4,10 +4,7 @@ description: Adding metrics to a blog post or article is easily accomplished usi
 published: '2022-12-09'
 status: published
 entry: how-to
-tags:
-  - {value: Next.js}
-  - {value: Prisma}
-  - {value: coding}
+tags: ["Next.js", "Prisma", "coding"]
 ---
 
 > **April 14, 2024**: Please be advised that since writing this, Planetscale has shut down its hobby tier 😭
@@ -382,9 +379,9 @@ async function getPostViews(slug: string): Promise<Views> {
 
 async function updatePostViews(slug: string): Promise<Views> {
  const res = await fetch(
-    `${API_URL}/${slug}`, 
-    { 
-      method: "POST" 
+    `${API_URL}/${slug}`,
+    {
+      method: "POST"
     }
   );
  if (!res.ok) {
@@ -394,7 +391,7 @@ async function updatePostViews(slug: string): Promise<Views> {
 }
 
 export const usePostViews = (
-  slug: string, 
+  slug: string,
   config?: SWRConfiguration
 ) => {
  const { data, error, mutate } = useSWR<Views>(
@@ -957,7 +954,7 @@ import React from "react";
 import { useIntersection, useInterval } from "react-use";
 
 export const usePolling = (
-  interval: number = 1000, 
+  interval: number = 1000,
   max: number = 3
 ) => {
   const intersectionRef = React.useRef(null);

@@ -1,4 +1,18 @@
+## 2.0.0
+
+### Major Changes
+
+- 7bc9762: Content is now built using [velite](https://velite.js.org/)
+
 ## 1.4.0
+
+### Minor Changes
+
+- 364704e: Migrated from contentlayer (no longer maintained, see [Contentlayer - State of the project](https://github.com/contentlayerdev/contentlayer/issues/429)) to [velite](https://velite.js.org/)
+
+### Patch Changes
+
+- 4acd561: Patched a small issue with images
 
 ### Minor Changes
 

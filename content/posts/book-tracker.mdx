@@ -3,8 +3,7 @@ title: Book Tracking with Literal.Club
 published: 01-15-2024
 status: published
 entry: how-to
-tags:
-  - {value: coding}
+tags: [coding]
 ---
 
 Everyone and their mothers always makes a goal to read more books at the start of every given year. Last year, I read more than I hoped, but on the previous version of my site had a tracker that was pretty tedious to use.
@@ -87,10 +86,10 @@ import { LiteralContext } from "@/context/literal";
 
 // ....
 
-export default function Root({ 
+export default function Root({
  children
 }: { children; React.ReactNode }) {
- 
+
  // ...
  return (
   <html>
@@ -173,7 +172,7 @@ const query = gql`
 export default function ReadingPreview {
  const [ book, setBook ] = useState({} as Book);
  const { data, error} = useSuspenseQuery(query);
- 
+
  // filter when getting data to find book with status
  // 'IS_READING'
  useEffect(() => {
@@ -183,7 +182,7 @@ export default function ReadingPreview {
         .[0];
   setBook(current.book as Book);
  }, [data])
- 
+
  return (
   <Suspense>
        <div className="grid grid-cols-3 gap-4">
@@ -196,7 +195,7 @@ export default function ReadingPreview {
          />
          <div className="col-span-2">
            <div className="pb-2">
-             <h4 
+             <h4
                 className="font-serif font-semibold text-[#ffffff]">
                {book.title}
              </h4>
@@ -207,7 +206,7 @@ export default function ReadingPreview {
               </p>
            </div>
            <p>{book.description?.slice(0, 120).concat("...")}</p>
-           <div 
+           <div
               className="flex justify-end text-[#7F7F7F] hover:underline hover:decoration-wavy hover:text-[#ffffff]">
              <Link href={"/books"}>read more</Link>
            </div>
