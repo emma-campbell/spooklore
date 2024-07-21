@@ -15,7 +15,9 @@ export default async function Changelog() {
         className={"h-48 w-auto"}
         priority={true}
       />
-      <h1 className={"text-4xl pb-4"}>Changelog</h1>
+      <h1 className={"font-sans uppercase text-body text-4xl pb-4"}>
+        Changelog
+      </h1>
       <p className={"text-body"}>
         A <i>changelog</i> is a document that collects records of changes made
         to a piece of software. Here are all the ways this site has changed over

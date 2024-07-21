@@ -56,7 +56,7 @@ export default function Notebook() {
           className={"w-48"}
           priority={true}
         />
-        <h1 className={"text-4xl"}>notebook</h1>
+        <h1 className={"font-sans uppercase text-body text-4xl"}>notebook</h1>
         <h2 className={"text-body"}>thoughts, notes, and...other things.</h2>
         {/* <Link
           href={"/rss.xml"}

@@ -6,16 +6,24 @@ import * as runtime from "react/jsx-runtime";
 export const defaultComponents: MDXComponents = {
   Aside,
   h1: ({ children, className }) => {
-    return <h2 className="font-serif text-black text-3xl">{children}</h2>;
+    return (
+      <h2 className="font-sans uppercase text-black text-3xl">{children}</h2>
+    );
   },
   h2: ({ children }) => {
-    return <h3 className="font-serif text-black text-2xl">{children}</h3>;
+    return (
+      <h3 className="font-sans uppercase text-black text-2xl">{children}</h3>
+    );
   },
   h3: ({ children }) => {
-    return <h4 className="font-serif text-black text-xl">{children}</h4>;
+    return (
+      <h4 className="font-sans uppercase text-black text-xl">{children}</h4>
+    );
   },
   h4: ({ children }) => {
-    return <h5 className="font-serif text-black text-lg">{children}</h5>;
+    return (
+      <h5 className="font-sans uppercase text-black text-lg">{children}</h5>
+    );
   },
   ol: ({ children }) => {
     return <ol className="list-inside list-decimal">{children}</ol>;

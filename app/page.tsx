@@ -114,7 +114,7 @@ export default function Home() {
                 <Link
                   href={href}
                   className={
-                    "text-md font-semibold text-body underline hover:text-highlighted"
+                    "font-sans uppercase text-md font-semibold text-body hover:text-highlighted"
                   }
                 >
                   {title}

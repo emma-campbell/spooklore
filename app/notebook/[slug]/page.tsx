@@ -57,21 +57,21 @@ export default function NotebookEntry({
           <ViewCounter track={true} slug={slug} />
           <PostType type={post.entry} />
         </div>
-        <h1 className={"text-4xl"}>{post.title}</h1>
+        <h1 className={"font-sans uppercase text-4xl"}>{post.title}</h1>
       </section>
       <section className={"flex flex-col space-y-4 text-body pb-16"}>
         <MDXContent code={post.content} />
       </section>
       <section>
-        <h4 className={"font-serif text-3xl text-black pb-2"}>Metadata</h4>
+        <h4
+          className={"font-sans uppercase text-body text-3xl text-black pb-2"}
+        >
+          Metadata
+        </h4>
         <div className={"flex flex-col text-body"}>
           <div className={"flex justify-between text-lg"}>
             <p>Published</p>
-            <p>{published.format("MMM DD YYYY")}</p>
-          </div>
-          <div className={"flex justify-between text-lg"}>
-            <p>Type</p>
-            <p>{post.entry}</p>
+            <p>{published.format("MMMM DD, YYYY")}</p>
           </div>
           {post.tags ? (
             <div className={"flex justify-between text-lg"}>

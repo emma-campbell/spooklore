@@ -45,7 +45,7 @@ export default function ReadingPreview() {
             <ImageSkeleton className="w-full h-4 bg-body/30 rounded-full" />
           }
         >
-          <h4 className="font-serif font-semibold font-body">{book.title}</h4>
+          <h4 className="font-sans font-semibold font-body">{book.title}</h4>
         </Suspense>
         <Suspense
           fallback={

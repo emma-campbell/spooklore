@@ -126,7 +126,7 @@ export default function RootLayout({
           <Nav />
         </div>
         <LiteralWrapper>
-          <main className="mx-auto px-2 md:px-0">{children}</main>
+          <main className="mx-auto text-md px-2 md:px-0">{children}</main>
         </LiteralWrapper>
         <div className="flex justify-center">
           <Footer />

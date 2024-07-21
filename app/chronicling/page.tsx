@@ -44,10 +44,7 @@ export default function Chronicling() {
         className={"h-48 w-auto pb-4"}
         priority={true}
       />
-      <h1 className={"text-black text-3xl tracking-tight pb-3"}>
-        Emma Campbell
-      </h1>
-      <div className={"text-body text-lg pb-3"}>
+      <div className={"text-body text-md pb-3"}>
         <p>
           Hi, I&apos;m Emma. Pleased to digitally meet you. This section
           includes some subpages, and some basic info about me.
@@ -65,7 +62,7 @@ export default function Chronicling() {
               >
                 {title}
               </Link>
-              <p className={"text-body"}>{description}</p>
+              <p className={"text-md text-body"}>{description}</p>
             </li>
           );
         })}
