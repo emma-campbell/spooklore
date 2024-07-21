@@ -46,7 +46,7 @@ export const Nav = () => {
               className,
             )}
           >
-            {text}
+            {text.toUpperCase()}
           </Link>
         );
       })}
@@ -57,7 +57,7 @@ export const Nav = () => {
         className={"text-highlighted hover:text-body font-sans"}
         onClick={() => router.back()}
       >
-        ← back
+        ← BACK
       </button>
     </nav>
   );

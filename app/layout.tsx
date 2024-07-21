@@ -77,10 +77,10 @@ const friendly_forrest = localFont({
   variable: "--font-primary",
 });
 
-const volume_tc_sans = localFont({
+const hello_imperfect = localFont({
   src: [
     {
-      path: "styles/fonts/Volume TC Sans.otf",
+      path: "styles/fonts/hello-imperfect-webfont.woff2",
       weight: "400",
       style: "normal",
     },
@@ -111,7 +111,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${friendly_forrest.variable} ${volume_tc_sans.variable} ${jetbrains.variable} w-full items-center`}
+      className={`${friendly_forrest.variable} ${hello_imperfect.variable} ${jetbrains.variable} w-full items-center`}
     >
       <head>
         <link

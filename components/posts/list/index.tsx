@@ -16,7 +16,9 @@ export default function PostList({
   return (
     <div className="flex flex-col space-y-2">
       <div className="flex flex-row justify-between space-x-2 align-text-bottom">
-        <h2 className="font-sans text-lg text-highlighted">{textMonth}</h2>
+        <h2 className="font-sans text-lg text-highlighted">
+          {textMonth.toUpperCase()}
+        </h2>
         {year ? (
           <>
             <h2 className="justify-end font-sans text-md text-highlighted">

@@ -58,14 +58,14 @@ export default function Notebook() {
         />
         <h1 className={"text-4xl"}>notebook</h1>
         <h2 className={"text-body"}>thoughts, notes, and...other things.</h2>
-        <Link
+        {/* <Link
           href={"/rss.xml"}
           className={
             "font-sans text-primary hover:underline hover:decoration-wavy"
           }
         >
           follow feed
-        </Link>
+        </Link> */}
       </section>
       <section className={"flex flex-col space-y-8"}>
         {posts.map((entry) => {

@@ -10,16 +10,12 @@ export const Hero = () => {
       <div className={"absolute"}>
         <h1
           className={
-            "flex-shrink-0 font-sans text-6xl text-primary font-outline-primary-4 tracking-widest"
+            "flex-shrink-0 font-sans text-6xl text-primary tracking-widest"
           }
         >
-          EMMA&apos;s BLOG
+          EMMA&apos;S BLOG
         </h1>
-        <h2
-          className={
-            "font-serif text-black max-w-96 text-3xl font-outline-black-1"
-          }
-        >
+        <h2 className={"font-serif text-black max-w-96 text-2xl font-semibold"}>
           A Collection of Thoughts &{"\n"} Notes by Emma Campbell
         </h2>
         <Scribble className={""} />

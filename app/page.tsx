@@ -71,7 +71,7 @@ export default function Home() {
           href="/notebook"
           className={"flex items-center w-full justify-around"}
         >
-          <h1 className="font-serif uppercase text-2xl tracking-[0.25em] text-black font-outline-black-heading hover:underline pb-2">
+          <h1 className="font-sans uppercase text-2xl tracking-[0.25em] text-body hover:underline pb-2">
             latest posts
           </h1>
         </Link>
@@ -90,7 +90,7 @@ export default function Home() {
           href="/chronicling/books"
           className={"flex items-center w-full justify-around"}
         >
-          <h1 className="font-serif uppercase text-2xl text-black tracking-[0.25em] font-outline-black-heading hover:underline pb-2">
+          <h1 className="font-sans uppercase text-2xl tracking-[0.25em] text-body hover:underline pb-2">
             currently reading
           </h1>
         </Link>
@@ -103,7 +103,7 @@ export default function Home() {
           href="/chronicling"
           className={"flex items-center w-full justify-around"}
         >
-          <h1 className="font-serif uppercase text-2xl text-black tracking-[0.25em] font-outline-black-heading hover:underline pb-2">
+          <h1 className="font-sans uppercase text-2xl tracking-[0.25em] text-body hover:underline pb-2">
             about the author
           </h1>
         </Link>
@@ -114,7 +114,7 @@ export default function Home() {
                 <Link
                   href={href}
                   className={
-                    "text-md text-body underline hover:text-highlighted"
+                    "text-md font-semibold text-body underline hover:text-highlighted"
                   }
                 >
                   {title}
