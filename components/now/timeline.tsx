@@ -16,7 +16,7 @@ const TimelineItem = ({ month, year, children }: TimelineItemProps) => {
     <li className="relative group border-l border-dashed -top-4 ms-4">
       <div className="pl-4">
         <span className="absolute bg-highlighted border-highlighted/40 rounded-full w-3 h-3 -start-1.5 top-2"></span>
-        <time className="font-medium">{format(date, "MMMM Y")}</time>
+        <time className="font-medium">{format(date, "MMMM y")}</time>
         <div className="space-y-4 text-sm">{children}</div>
       </div>
     </li>

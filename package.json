@@ -7,7 +7,7 @@
     "yarn": "4.3.1"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev & yarn velite --watch",
     "build": "yarn generate && next build",
     "start": "next start",
     "lint": "next lint",

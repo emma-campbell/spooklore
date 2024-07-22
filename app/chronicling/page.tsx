@@ -50,14 +50,14 @@ export default function Chronicling() {
           includes some subpages, and some basic info about me.
         </p>
       </div>
-      <ul>
+      <ul className="space-y-1">
         {links.map(({ title, description, href }) => {
           return (
             <li key={title}>
               <Link
                 href={href}
                 className={
-                  "text-lg text-black underline hover:text-highlighted"
+                  "font-sans uppercase text-lg text-body hover:text-highlighted"
                 }
               >
                 {title}

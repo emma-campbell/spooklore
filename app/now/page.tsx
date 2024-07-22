@@ -48,7 +48,7 @@ export default function Now() {
   return (
     <section className="flex flex-col space-y-10 text-body">
       <div>
-        <h1 className="text-4xl font-medium text-black pb-2">
+        <h1 className="font-sans uppercase text-4xl font-medium text-body pb-2">
           What I&apos;m doing now
         </h1>
         <p className="text-md">
