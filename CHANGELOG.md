@@ -1,5 +1,14 @@
 ## 2.0.0
 
+## 2.1.0
+
+### Minor Changes
+
+- 954b256: Updated headings to use Hello Imperfect
+- e650bd7: Replaced TC Sans with [Hello Imperfect](https://creativemarket.com/StudioFunshop/7526020-Imperfect%21-A-Handwritten-Sans-Serif)
+- 93180af: Update the colophon, replaced heading styling with new sans font
+- 70f9b89: Changed the layout of the navigation
+
 ### Major Changes
 
 - 7bc9762: Content is now built using [velite](https://velite.js.org/)
