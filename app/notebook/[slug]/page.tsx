@@ -1,22 +1,15 @@
-// import { allPosts } from "contentlayer/generated";
-import { posts } from "@velite";
+
+import { posts } from "@/.velite";
+import { MDXContent } from "@/components/mdx";
+import { PostType } from "@/components/posts/post-type";
+import { ViewCounter } from "@/components/view-counter";
 import { getPost } from "@/lib/content";
 import moment from "moment";
-import { ViewCounter } from "@/components/view-counter";
-import { PostType } from "@/components/posts/post-type";
-import { MDXContent } from "@/components/mdx";
-import { formatDistanceToNow, format } from "date-fns";
 
-export async function generateStaticParams() {
-  let paths = posts;
-
-  if (process.env.NODE_ENV !== "development") {
-    paths = posts.filter((p) => p.status != "draft");
-  }
-
-  return posts.map((p) => {
-    slug: p.slug;
-  });
+export async function getStaticPaths() {
+  return posts
+    .filter(f => f.status != "draft")
+    .map(f => ({ slug: f.slug }));
 }
 
 export async function generateMetadata({
@@ -24,7 +17,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = getPost(slug);
 
   return {
@@ -39,12 +32,14 @@ export async function generateMetadata({
   };
 }
 
-export default function NotebookEntry({
+type Params = Promise<{
+  slug: string
+}>;
+
+export default async function NotebookEntry({
   params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = params;
+}: {params: Params}) {
+  const { slug } = await params;
   const post = getPost(slug);
   const published = moment.utc(post.published);
 

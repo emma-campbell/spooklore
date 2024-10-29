@@ -79,7 +79,7 @@ export default function Notebook() {
           for (const [month, posts] of monthsSorted) {
             dom.push(
               <PostList
-                key={month}
+                key={`${month}-${idx}`}
                 month={month}
                 posts={posts}
                 year={idx == target ? year : undefined}

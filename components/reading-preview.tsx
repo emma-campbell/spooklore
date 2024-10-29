@@ -65,9 +65,9 @@ export default function ReadingPreview() {
           <ImageSkeleton className="w-full h-3 bg-body/30 rounded-full" />
         }
       >
-        <p className="col-span-2 flex-shrink-0 flex justify-end">
+        <div className="col-span-2 flex-shrink-0 flex justify-end">
           {book.id ? <ReadDate id={book.id} /> : null}
-        </p>
+        </div>
       </Suspense>
     </div>
   );
