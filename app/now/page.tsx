@@ -44,10 +44,10 @@ const sections: TimelineProps = {
       children: [
         <>
           <p>
-            I've picked up more part time work, and as a result I am learning
-            React Native 👀
+            I&apos;ve picked up more part time work, and as a result I am
+            learning React Native 👀
           </p>
-          <p>I've also officially left Twitter, because f*ck you Elon.</p>
+          <p>I&apos;ve also officially left Twitter, because f*ck you Elon.</p>
         </>,
       ],
     },

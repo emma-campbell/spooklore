@@ -1,4 +1,3 @@
-
 import { posts } from "@/.velite";
 import { MDXContent } from "@/components/mdx";
 import { PostType } from "@/components/posts/post-type";
@@ -6,16 +5,16 @@ import { ViewCounter } from "@/components/view-counter";
 import { getPost } from "@/lib/content";
 import moment from "moment";
 
-export async function getStaticPaths() {
+export async function generateStaticParams() {
   return posts
-    .filter(f => f.status != "draft")
-    .map(f => ({ slug: f.slug }));
+    .filter((f) => f.status != "draft")
+    .map((f) => ({ slug: f.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const post = getPost(slug);
@@ -33,12 +32,10 @@ export async function generateMetadata({
 }
 
 type Params = Promise<{
-  slug: string
+  slug: string;
 }>;
 
-export default async function NotebookEntry({
-  params,
-}: {params: Params}) {
+export default async function NotebookEntry({ params }: { params: Params }) {
   const { slug } = await params;
   const post = getPost(slug);
   const published = moment.utc(post.published);
