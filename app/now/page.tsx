@@ -38,12 +38,25 @@ const sections: TimelineProps = {
         </>,
       ],
     },
+    {
+      month: 10,
+      year: 2024,
+      children: [
+        <>
+          <p>
+            I've picked up more part time work, and as a result I am learning
+            React Native 👀
+          </p>
+          <p>I've also officially left Twitter, because f*ck you Elon.</p>
+        </>,
+      ],
+    },
   ],
 };
 
 export default function Now() {
   // "2024/07/21 2:51pm EST"
-  const lastUpdated: Date = new Date(2024, 6, 21, 14, 51);
+  const lastUpdated: Date = new Date(2024, 10, 12, 20, 54);
 
   return (
     <section className="flex flex-col space-y-10 text-body">
@@ -58,7 +71,7 @@ export default function Now() {
       </div>
       <Timeline
         items={sections.items.sort((a, b) =>
-          compareDesc(new Date(a.year, a.month), new Date(b.year, b.month)),
+          compareDesc(new Date(a.year, a.month), new Date(b.year, b.month))
         )}
       />
       <LastUpdated date={lastUpdated} />
