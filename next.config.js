@@ -12,6 +12,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ["next-mdx-remote"],
   webpack: (config, options = {}) => {
     config.externals.push("sharp");
     const { webpack } = options;
@@ -19,7 +20,7 @@ const nextConfig = {
     config.plugins.push(
       new webpack.IgnorePlugin({
         resourceRegExp: regex,
-      }),
+      })
     );
     return config;
   },
