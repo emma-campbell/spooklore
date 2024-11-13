@@ -1,7 +1,7 @@
 import Andrea from "@/public/andrea.jpeg";
 import Crew from "@/public/crew.jpeg";
 import Moose from "@/public/moose.jpg";
-import Portrait from "@/public/profile.jpeg";
+import Portrait from "@/public/profile.png";
 import Image from "next/image";
 
 export default function About() {
