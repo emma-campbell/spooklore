@@ -1,4 +1,13 @@
-## 2.0.0
+## 2.2.0
+
+### Minor Changes
+
+- a7de596: Change profile image
+
+### Patch Changes
+
+- 2827080: Capitalize book title for currently reading
+- ed6d61a: Upgrade next-mdx-remote and support next 15
 
 ## 2.1.0
 
@@ -8,6 +17,8 @@
 - e650bd7: Replaced TC Sans with [Hello Imperfect](https://creativemarket.com/StudioFunshop/7526020-Imperfect%21-A-Handwritten-Sans-Serif)
 - 93180af: Update the colophon, replaced heading styling with new sans font
 - 70f9b89: Changed the layout of the navigation
+
+## 2.0.0
 
 ### Major Changes
 
