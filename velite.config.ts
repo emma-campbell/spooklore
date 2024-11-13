@@ -25,7 +25,7 @@ export default defineConfig({
           published: s.isodate(),
           description: s.string().optional(),
           status: s.enum(["draft", "published"]),
-          entry: s.enum(["note", "essay", "how-to", "experiment"]),
+          entry: s.enum(["note", "micro", "essay", "how-to", "experiment"]),
           metadata: s.metadata(),
           tags: s.array(s.string()).optional(),
           content: s.mdx(),
