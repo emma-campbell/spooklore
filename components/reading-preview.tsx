@@ -32,7 +32,7 @@ export default function ReadingPreview() {
 
   useEffect(() => {
     const curr = (data as any)?.myReadingStates.filter(
-      (s: any) => s.status === "IS_READING",
+      (s: any) => s.status === "IS_READING"
     )?.[0];
     setBook(curr.book as Book);
   }, [data]);

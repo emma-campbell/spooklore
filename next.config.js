@@ -12,6 +12,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    ppr: "incremental",
+  },
   transpilePackages: ["next-mdx-remote"],
   webpack: (config, options = {}) => {
     config.externals.push("sharp");

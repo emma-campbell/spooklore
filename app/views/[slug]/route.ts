@@ -6,6 +6,9 @@ export async function GET(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const slug = path.replace("/views/", "");
 
+  console.log(path);
+  console.log(slug);
+
   try {
     const data = await db
       .selectFrom("stats")

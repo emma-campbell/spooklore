@@ -1,12 +1,13 @@
 import { PostPreview } from "@/components/posts/post-preview";
 import { Hero } from "@/components/layout/hero";
-// import dynamic from "next/dynamic";
-
+import { Suspense } from "react";
 import Link from "next/link";
 import { Posts } from "@/lib/posts";
 import moment from "moment";
+import dynamic from "next/dynamic";
 
-// const ReadingPreview = dynamic(() => import("@/components/reading-preview"));
+const ReadingPreview = dynamic(() => import("@/components/reading-preview"));
+export const experimental_ppr = true;
 
 function getPosts() {
   return Posts()
@@ -85,7 +86,7 @@ export default function Home() {
           blog in 2022.
         </p>
       </section>
-      {/* <section id="currently-reading" className="">
+      <section id="currently-reading" className="">
         <Link
           href="/chronicling/books"
           className={"flex items-center w-full justify-around"}
@@ -94,10 +95,12 @@ export default function Home() {
             currently reading
           </h1>
         </Link>
-        <div className="col-span-3">
-          <ReadingPreview />
-        </div>
-      </section> */}
+        <Suspense>
+          <div className="col-span-3">
+            <ReadingPreview />
+          </div>
+        </Suspense>
+      </section>
       <section id={"about-the-author"}>
         <Link
           href="/chronicling"
