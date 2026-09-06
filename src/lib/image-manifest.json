@@ -763,6 +763,54 @@
 			"takenAt": "2025-03-30T10:26:55.000Z"
 		}
 	},
+	"/images/posts/summer-2026-rewind/bombonera.jpg": {
+		"width": 2000,
+		"height": 1333,
+		"hash": "a86c72ff49-v2-webp75-480.800.1200.1600-hdr0.68-640.1280",
+		"type": "image/webp",
+		"variants": [
+			{
+				"w": 480,
+				"src": "/images/posts/summer-2026-rewind/bombonera-480w.webp"
+			},
+			{
+				"w": 800,
+				"src": "/images/posts/summer-2026-rewind/bombonera-800w.webp"
+			},
+			{
+				"w": 1200,
+				"src": "/images/posts/summer-2026-rewind/bombonera-1200w.webp"
+			},
+			{
+				"w": 1600,
+				"src": "/images/posts/summer-2026-rewind/bombonera-1600w.webp"
+			}
+		]
+	},
+	"/images/posts/summer-2026-rewind/groovy-van.jpg": {
+		"width": 1500,
+		"height": 2000,
+		"hash": "2b6296551d-v2-webp75-480.800.1200.1600-hdr0.68-640.1280",
+		"type": "image/webp",
+		"variants": [
+			{
+				"w": 480,
+				"src": "/images/posts/summer-2026-rewind/groovy-van-480w.webp"
+			},
+			{
+				"w": 800,
+				"src": "/images/posts/summer-2026-rewind/groovy-van-800w.webp"
+			},
+			{
+				"w": 1200,
+				"src": "/images/posts/summer-2026-rewind/groovy-van-1200w.webp"
+			},
+			{
+				"w": 1500,
+				"src": "/images/posts/summer-2026-rewind/groovy-van-1500w.webp"
+			}
+		]
+	},
 	"/images/posts/the-habit-experiment/dopower-chart.png": {
 		"width": 924,
 		"height": 749,
